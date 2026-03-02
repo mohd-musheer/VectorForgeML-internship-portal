@@ -1,0 +1,181 @@
+<!DOCTYPE html>
+<html lang="en" class="light">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Data Analysis Internship — VectorForgeML</title>
+  <meta name="description" content="VectorForgeML Data Analysis Internship — Build analytical pipelines, perform statistical analysis, and create reproducible data reports. Online, self-paced." />
+
+  <!-- TailwindCSS CDN -->
+  <script src="https://cdn.tailwindcss.com"></script>
+  <script>tailwind.config = { darkMode: 'class' };</script>
+
+  <!-- Inter Font -->
+  <link rel="preconnect" href="https://fonts.googleapis.com" />
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800&display=swap" rel="stylesheet" />
+
+  <!-- Custom Styles -->
+  <link rel="stylesheet" href="../assets/css/styles.css" />
+</head>
+<body class="grid-pattern">
+
+  <!-- Navbar -->
+  <div id="navbar-container"></div>
+
+  <!-- ==================== PAGE HEADER ==================== -->
+  <section class="section pb-0">
+    <div class="max-w-4xl mx-auto text-center fade-in">
+      <a href="../internships.html" class="inline-flex items-center gap-1 hover:text-cyan-400 text-sm mb-6 transition-colors no-underline" style="color:var(--text-muted)">
+        <svg class="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M15 19l-7-7 7-7"/></svg>
+        Back to Internships
+      </a>
+      <div class="inline-flex items-center gap-2 px-4 py-1.5 rounded-full bg-blue-500/10 border border-blue-500/20 text-blue-400 text-xs font-medium mb-6 ml-4">
+        📊 Data Track
+      </div>
+      <h1 class="text-3xl sm:text-4xl md:text-5xl font-extrabold mb-6" style="color:var(--text-primary)">
+        Data Analysis <span class="gradient-text">Internship</span>
+      </h1>
+      <p class="text-base sm:text-lg max-w-2xl mx-auto leading-relaxed" style="color:var(--text-secondary)">
+        Develop analytical pipelines and create reproducible data reports using R-based workflows.
+      </p>
+    </div>
+  </section>
+
+  <!-- ==================== OVERVIEW ==================== -->
+  <section class="section">
+    <div class="max-w-4xl mx-auto space-y-8">
+
+      <!-- What You'll Learn -->
+      <div class="glass-card p-6 sm:p-8 fade-in">
+        <h2 class="text-xl font-bold mb-4 flex items-center gap-2" style="color:var(--text-primary)">
+          <svg class="w-5 h-5 text-cyan-400" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M12 6.253v13m0-13C10.832 5.477 9.246 5 7.5 5S4.168 5.477 3 6.253v13C4.168 18.477 5.754 18 7.5 18s3.332.477 4.5 1.253m0-13C13.168 5.477 14.754 5 16.5 5c1.747 0 3.332.477 4.5 1.253v13C19.832 18.477 18.247 18 16.5 18c-1.746 0-3.332.477-4.5 1.253"/></svg>
+          What You'll Learn
+        </h2>
+        <ul class="space-y-3" style="color:var(--text-secondary)">
+          <li class="flex items-start gap-3">
+            <span class="text-cyan-400 mt-1 flex-shrink-0">▸</span>
+            <span>Data wrangling and cleaning using R (tidyverse, dplyr, tidyr)</span>
+          </li>
+          <li class="flex items-start gap-3">
+            <span class="text-cyan-400 mt-1 flex-shrink-0">▸</span>
+            <span>Exploratory data analysis (EDA) and statistical summarization</span>
+          </li>
+          <li class="flex items-start gap-3">
+            <span class="text-cyan-400 mt-1 flex-shrink-0">▸</span>
+            <span>Data visualization — ggplot2, base R graphics, and report generation</span>
+          </li>
+          <li class="flex items-start gap-3">
+            <span class="text-cyan-400 mt-1 flex-shrink-0">▸</span>
+            <span>Statistical testing and hypothesis validation</span>
+          </li>
+          <li class="flex items-start gap-3">
+            <span class="text-cyan-400 mt-1 flex-shrink-0">▸</span>
+            <span>Reproducible analysis with R Markdown and VectorForgeML tools</span>
+          </li>
+          <li class="flex items-start gap-3">
+            <span class="text-cyan-400 mt-1 flex-shrink-0">▸</span>
+            <span>GitHub-based version control, documentation, and project management</span>
+          </li>
+        </ul>
+      </div>
+
+      <!-- Required Tools -->
+      <div class="glass-card p-6 sm:p-8 fade-in">
+        <h2 class="text-xl font-bold mb-4 flex items-center gap-2" style="color:var(--text-primary)">
+          <svg class="w-5 h-5 text-cyan-400" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M10.325 4.317c.426-1.756 2.924-1.756 3.35 0a1.724 1.724 0 002.573 1.066c1.543-.94 3.31.826 2.37 2.37a1.724 1.724 0 001.066 2.573c1.756.426 1.756 2.924 0 3.35a1.724 1.724 0 00-1.066 2.573c.94 1.543-.826 3.31-2.37 2.37a1.724 1.724 0 00-2.573 1.066c-.426 1.756-2.924 1.756-3.35 0a1.724 1.724 0 00-2.573-1.066c-1.543.94-3.31-.826-2.37-2.37a1.724 1.724 0 00-1.066-2.573c-1.756-.426-1.756-2.924 0-3.35a1.724 1.724 0 001.066-2.573c-.94-1.543.826-3.31 2.37-2.37.996.608 2.296.07 2.572-1.065z"/><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M15 12a3 3 0 11-6 0 3 3 0 016 0z"/></svg>
+          Required Tools
+        </h2>
+        <div class="grid grid-cols-1 sm:grid-cols-2 gap-3">
+          <div class="flex items-center gap-3 p-3 rounded-lg" style="background:var(--section-alt-bg)">
+            <span class="text-cyan-400 font-bold text-sm">R</span>
+            <span class="text-sm" style="color:var(--text-secondary)">R language (v4.0+)</span>
+          </div>
+          <div class="flex items-center gap-3 p-3 rounded-lg" style="background:var(--section-alt-bg)">
+            <span class="text-cyan-400 font-bold text-sm">IDE</span>
+            <span class="text-sm" style="color:var(--text-secondary)">RStudio / VS Code</span>
+          </div>
+          <div class="flex items-center gap-3 p-3 rounded-lg" style="background:var(--section-alt-bg)">
+            <span class="text-cyan-400 font-bold text-sm">Git</span>
+            <span class="text-sm" style="color:var(--text-secondary)">Git & GitHub account</span>
+          </div>
+          <div class="flex items-center gap-3 p-3 rounded-lg" style="background:var(--section-alt-bg)">
+            <span class="text-cyan-400 font-bold text-sm">Libs</span>
+            <span class="text-sm" style="color:var(--text-secondary)">tidyverse, ggplot2, R Markdown</span>
+          </div>
+        </div>
+      </div>
+
+      <!-- Info Grid -->
+      <div class="grid grid-cols-1 sm:grid-cols-2 gap-6">
+        <!-- Eligibility -->
+        <div class="glass-card p-6 fade-in">
+          <h3 class="font-semibold mb-3 flex items-center gap-2" style="color:var(--text-primary)">
+            <svg class="w-4 h-4 text-cyan-400" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M16 7a4 4 0 11-8 0 4 4 0 018 0zM12 14a7 7 0 00-7 7h14a7 7 0 00-7-7z"/></svg>
+            Eligibility
+          </h3>
+          <ul class="space-y-2 text-sm" style="color:var(--text-secondary)">
+            <li>• Students, graduates, or self-learners</li>
+            <li>• Interest in data analysis and statistics</li>
+            <li>• Basic programming knowledge helpful</li>
+            <li>• Willingness to learn R-based workflows</li>
+          </ul>
+        </div>
+
+        <!-- Duration & Mode -->
+        <div class="glass-card p-6 fade-in">
+          <h3 class="font-semibold mb-3 flex items-center gap-2" style="color:var(--text-primary)">
+            <svg class="w-4 h-4 text-cyan-400" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M12 8v4l3 3m6-3a9 9 0 11-18 0 9 9 0 0118 0z"/></svg>
+            Duration & Mode
+          </h3>
+          <div class="space-y-3">
+            <div class="flex justify-between text-sm">
+              <span style="color:var(--text-secondary)">Duration</span>
+              <span class="font-medium" style="color:var(--text-primary)">4–8 Weeks</span>
+            </div>
+            <div class="flex justify-between text-sm">
+              <span style="color:var(--text-secondary)">Mode</span>
+              <span class="font-medium" style="color:var(--text-primary)">Online (Remote)</span>
+            </div>
+            <div class="flex justify-between text-sm">
+              <span style="color:var(--text-secondary)">Pace</span>
+              <span class="font-medium" style="color:var(--text-primary)">Self-paced</span>
+            </div>
+          </div>
+        </div>
+
+        <!-- Certification -->
+        <div class="glass-card p-6 sm:col-span-2 fade-in">
+          <h3 class="font-semibold mb-3 flex items-center gap-2" style="color:var(--text-primary)">
+            <svg class="w-4 h-4 text-cyan-400" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 12l2 2 4-4m5.618-4.016A11.955 11.955 0 0112 2.944a11.955 11.955 0 01-8.618 3.04A12.02 12.02 0 003 9c0 5.591 3.824 10.29 9 11.622 5.176-1.332 9-6.03 9-11.622 0-1.042-.133-2.052-.382-3.016z"/></svg>
+            Certification Eligibility
+          </h3>
+          <p class="text-sm leading-relaxed" style="color:var(--text-secondary)">
+            Interns who successfully complete all assigned tasks with acceptable quality will receive a verifiable digital certificate with a unique ID. Exceptional performers may also receive a Letter of Recommendation (LOR).
+          </p>
+        </div>
+      </div>
+
+      <!-- Apply CTA -->
+      <div class="glass-card p-6 sm:p-8 text-center fade-in">
+        <h2 class="text-xl font-bold mb-3" style="color:var(--text-primary)">Ready to Apply?</h2>
+        <p class="mb-6" style="color:var(--text-secondary)">Send your application to get started with the Data Analysis track.</p>
+        <a href="mailto:vectorforgeml@yahoo.com?subject=Data%20Analysis%20Internship%20Application" class="btn-primary text-base px-8 py-3">
+          Apply via Email
+          <svg class="w-4 h-4 ml-2" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M3 8l7.89 5.26a2 2 0 002.22 0L21 8M5 19h14a2 2 0 002-2V7a2 2 0 00-2-2H5a2 2 0 00-2 2v10a2 2 0 002 2z"/>
+          </svg>
+        </a>
+        <p class="text-xs mt-3" style="color:var(--text-muted)">vectorforgeml@yahoo.com</p>
+      </div>
+    </div>
+  </section>
+
+  <!-- Footer -->
+  <div id="footer-container"></div>
+
+  <!-- Scripts -->
+  <script src="../assets/js/main.js"></script>
+  <script src="../assets/js/chatbot.js"></script>
+</body>
+</html>

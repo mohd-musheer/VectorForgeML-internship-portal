@@ -1,0 +1,84 @@
+<!DOCTYPE html>
+<html lang="en" class="light">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Verify Certificate — VectorForgeML Internship Portal</title>
+  <meta name="description" content="Verify VectorForgeML internship certificates. Enter your unique certificate ID to check authenticity, status, and LOR eligibility." />
+
+  <!-- TailwindCSS CDN -->
+  <script src="https://cdn.tailwindcss.com"></script>
+  <script>tailwind.config = { darkMode: 'class' };</script>
+
+  <!-- Inter Font -->
+  <link rel="preconnect" href="https://fonts.googleapis.com" />
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800&display=swap" rel="stylesheet" />
+
+  <!-- Custom Styles -->
+  <link rel="stylesheet" href="assets/css/styles.css" />
+</head>
+<body class="grid-pattern">
+
+  <!-- Navbar -->
+  <div id="navbar-container"></div>
+
+  <!-- ==================== PAGE HEADER ==================== -->
+  <section class="section pb-0">
+    <div class="max-w-4xl mx-auto text-center fade-in">
+      <div class="inline-flex items-center gap-2 px-4 py-1.5 rounded-full bg-blue-500/10 border border-blue-500/20 text-blue-400 text-xs font-medium mb-6">
+        <svg class="w-3.5 h-3.5" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 12l2 2 4-4m5.618-4.016A11.955 11.955 0 0112 2.944a11.955 11.955 0 01-8.618 3.04A12.02 12.02 0 003 9c0 5.591 3.824 10.29 9 11.622 5.176-1.332 9-6.03 9-11.622 0-1.042-.133-2.052-.382-3.016z"/></svg>
+        Certificate Verification
+      </div>
+      <h1 class="text-3xl sm:text-4xl md:text-5xl font-extrabold mb-6" style="color:var(--text-primary)">
+        Verify <span class="gradient-text">Certificate</span>
+      </h1>
+      <p class="text-base sm:text-lg max-w-2xl mx-auto leading-relaxed" style="color:var(--text-secondary)">
+        Enter a certificate ID to verify its authenticity and view details.
+      </p>
+    </div>
+  </section>
+
+  <!-- ==================== VERIFICATION FORM ==================== -->
+  <section class="section">
+    <div class="max-w-lg mx-auto">
+      <form id="verify-form" class="glass-card p-6 sm:p-8 fade-in">
+        <label for="cert-id-input" class="block text-sm font-medium mb-2" style="color:var(--text-secondary)">Certificate ID</label>
+        <div class="flex flex-col sm:flex-row gap-3">
+          <input
+            type="text"
+            id="cert-id-input"
+            class="form-input flex-1 font-mono"
+            placeholder="e.g. VFML-ML-2026-001"
+            required
+            autocomplete="off"
+          />
+          <button type="submit" class="btn-primary whitespace-nowrap">
+            Verify
+            <svg class="w-4 h-4 ml-2" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+              <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M21 21l-6-6m2-5a7 7 0 11-14 0 7 7 0 0114 0z"/>
+            </svg>
+          </button>
+        </div>
+        <p class="text-xs mt-3" style="color:var(--text-muted)">
+          Direct link format: <code style="color:var(--text-muted)">verify.html?id=VFML-ML-2026-001</code>
+        </p>
+      </form>
+    </div>
+  </section>
+
+  <!-- ==================== RESULT ==================== -->
+  <section class="section pt-0 pb-16">
+    <div id="verify-result" class="max-w-lg mx-auto">
+    </div>
+  </section>
+
+  <!-- Footer -->
+  <div id="footer-container"></div>
+
+  <!-- Scripts -->
+  <script src="assets/js/main.js"></script>
+  <script src="assets/js/verify.js"></script>
+  <script src="assets/js/chatbot.js"></script>
+</body>
+</html>

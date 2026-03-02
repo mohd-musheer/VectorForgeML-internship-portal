@@ -1,0 +1,89 @@
+<!DOCTYPE html>
+<html lang="en" class="light">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Internships — VectorForgeML Internship Portal</title>
+  <meta name="description" content="Explore VectorForgeML internship tracks — Machine Learning and Data Analysis. Online, self-paced, research-driven programs with certificate verification." />
+
+  <!-- TailwindCSS CDN -->
+  <script src="https://cdn.tailwindcss.com"></script>
+  <script>tailwind.config = { darkMode: 'class' };</script>
+
+  <!-- Inter Font -->
+  <link rel="preconnect" href="https://fonts.googleapis.com" />
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800&display=swap" rel="stylesheet" />
+
+  <!-- Custom Styles -->
+  <link rel="stylesheet" href="assets/css/styles.css" />
+</head>
+<body class="grid-pattern">
+
+  <!-- Navbar -->
+  <div id="navbar-container"></div>
+
+  <!-- ==================== PAGE HEADER ==================== -->
+  <section class="section pb-0">
+    <div class="max-w-4xl mx-auto text-center fade-in">
+      <div class="inline-flex items-center gap-2 px-4 py-1.5 rounded-full bg-blue-500/10 border border-blue-500/20 text-blue-400 text-xs font-medium mb-6">
+        <div class="pulse-dot"></div>
+        Open for Applications
+      </div>
+      <h1 class="text-3xl sm:text-4xl md:text-5xl font-extrabold mb-6" style="color:var(--text-primary)">
+        Internship <span class="gradient-text">Tracks</span>
+      </h1>
+      <p class="text-base sm:text-lg max-w-2xl mx-auto leading-relaxed" style="color:var(--text-secondary)">
+        Choose a track that aligns with your interests. Each internship is online, self-paced, and designed for practical learning.
+      </p>
+    </div>
+  </section>
+
+  <!-- ==================== TRACKS GRID ==================== -->
+  <section class="section">
+    <div class="max-w-4xl mx-auto">
+      <div id="tracks-container" class="grid grid-cols-1 md:grid-cols-2 gap-6">
+        <!-- Track cards are dynamically rendered by tracks.js -->
+      </div>
+    </div>
+  </section>
+
+  <!-- ==================== HOW IT WORKS ==================== -->
+  <section class="section pt-0">
+    <div class="max-w-4xl mx-auto">
+      <h2 class="text-xl sm:text-2xl font-bold mb-8 text-center fade-in" style="color:var(--text-primary)">How It Works</h2>
+
+      <div class="grid grid-cols-1 sm:grid-cols-3 gap-6">
+        <!-- Step 1 -->
+        <div class="glass-card p-6 text-center fade-in">
+          <div class="w-10 h-10 rounded-full bg-blue-500/15 text-blue-400 font-bold flex items-center justify-center mx-auto mb-4">1</div>
+          <h3 class="font-semibold mb-2" style="color:var(--text-primary)">Apply via Email</h3>
+          <p class="text-sm" style="color:var(--text-muted)">Send your application to vectorforgeml@yahoo.com with your resume and track preference.</p>
+        </div>
+
+        <!-- Step 2 -->
+        <div class="glass-card p-6 text-center fade-in">
+          <div class="w-10 h-10 rounded-full bg-cyan-500/15 text-cyan-400 font-bold flex items-center justify-center mx-auto mb-4">2</div>
+          <h3 class="font-semibold mb-2" style="color:var(--text-primary)">Work on Projects</h3>
+          <p class="text-sm" style="color:var(--text-muted)">Complete assigned tasks via GitHub with structured guidance and feedback.</p>
+        </div>
+
+        <!-- Step 3 -->
+        <div class="glass-card p-6 text-center fade-in">
+          <div class="w-10 h-10 rounded-full bg-emerald-500/15 text-emerald-400 font-bold flex items-center justify-center mx-auto mb-4">3</div>
+          <h3 class="font-semibold mb-2" style="color:var(--text-primary)">Get Certified</h3>
+          <p class="text-sm" style="color:var(--text-muted)">Receive a verifiable certificate and potential LOR upon successful completion.</p>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- Footer -->
+  <div id="footer-container"></div>
+
+  <!-- Scripts -->
+  <script src="assets/js/main.js"></script>
+  <script src="assets/js/tracks.js"></script>
+  <script src="assets/js/chatbot.js"></script>
+</body>
+</html>

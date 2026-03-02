@@ -1,0 +1,101 @@
+<!DOCTYPE html>
+<html lang="en" class="light">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Community — VectorForgeML Internship Portal</title>
+  <meta name="description" content="Join the VectorForgeML community. Connect on LinkedIn, Reddit, YouTube, GitHub, and Discord. Collaborate, learn, and grow together." />
+
+  <!-- TailwindCSS CDN -->
+  <script src="https://cdn.tailwindcss.com"></script>
+  <script>
+    tailwind.config = {
+      darkMode: 'class',
+    };
+  </script>
+
+  <!-- Inter Font -->
+  <link rel="preconnect" href="https://fonts.googleapis.com" />
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800&display=swap" rel="stylesheet" />
+
+  <!-- Custom Styles -->
+  <link rel="stylesheet" href="assets/css/styles.css" />
+</head>
+<body class="grid-pattern">
+
+  <!-- Navbar -->
+  <div id="navbar-container"></div>
+
+  <!-- ==================== HERO ==================== -->
+  <section class="hero-gradient relative py-20 sm:py-28 lg:py-32 px-4">
+    <div class="relative z-10 max-w-4xl mx-auto text-center fade-in">
+      <div class="inline-flex items-center gap-2 px-4 py-1.5 rounded-full bg-blue-500/10 border border-blue-500/20 text-blue-400 text-xs font-medium mb-6">
+        <div class="pulse-dot"></div>
+        Ecosystem & Collaboration
+      </div>
+      <h1 class="text-3xl sm:text-4xl md:text-5xl lg:text-6xl font-extrabold leading-tight mb-6" style="color:var(--text-primary)">
+        Join the <span class="gradient-text">VectorForgeML</span> Community
+      </h1>
+      <p class="text-base sm:text-lg md:text-xl max-w-2xl mx-auto leading-relaxed" style="color:var(--text-secondary)">
+        Connect with researchers, developers, and interns building the future of machine learning. Collaborate, learn, and grow together in our ecosystem.
+      </p>
+    </div>
+    <div class="absolute top-20 left-10 w-72 h-72 bg-blue-600/10 rounded-full blur-3xl pointer-events-none"></div>
+    <div class="absolute bottom-20 right-10 w-96 h-96 bg-cyan-500/5 rounded-full blur-3xl pointer-events-none"></div>
+  </section>
+
+  <!-- ==================== COMMUNITY CARDS ==================== -->
+  <section class="section">
+    <div class="max-w-6xl mx-auto">
+      <div class="text-center mb-14 fade-in">
+        <h2 class="text-2xl sm:text-3xl font-bold mb-4" style="color:var(--text-primary)">Our Platforms</h2>
+        <p class="max-w-xl mx-auto" style="color:var(--text-secondary)">Find us across multiple platforms. Each space serves a unique purpose in our ecosystem.</p>
+      </div>
+      <div id="community-container" class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-6">
+        <!-- Cards rendered by community.js -->
+      </div>
+    </div>
+  </section>
+
+  <!-- ==================== WHY JOIN ==================== -->
+  <section class="section pt-0">
+    <div class="max-w-4xl mx-auto">
+      <div class="glass-card p-8 sm:p-10 md:p-14 text-center fade-in">
+        <h2 class="text-2xl sm:text-3xl font-bold mb-6" style="color:var(--text-primary)">Why Join Our Community?</h2>
+        <div class="grid grid-cols-1 sm:grid-cols-3 gap-8 text-left">
+          <div>
+            <div class="feature-icon mb-3">
+              <svg class="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M17 20h5v-2a3 3 0 00-5.356-1.857M17 20H7m10 0v-2c0-.656-.126-1.283-.356-1.857M7 20H2v-2a3 3 0 015.356-1.857M7 20v-2c0-.656.126-1.283.356-1.857m0 0a5.002 5.002 0 019.288 0M15 7a3 3 0 11-6 0 3 3 0 016 0z"/></svg>
+            </div>
+            <h3 class="font-semibold mb-2" style="color:var(--text-primary)">Peer Learning</h3>
+            <p class="text-sm leading-relaxed" style="color:var(--text-secondary)">Collaborate with like-minded individuals working on ML and data analysis projects.</p>
+          </div>
+          <div>
+            <div class="feature-icon mb-3">
+              <svg class="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9.663 17h4.673M12 3v1m6.364 1.636l-.707.707M21 12h-1M4 12H3m3.343-5.657l-.707-.707m2.828 9.9a5 5 0 117.072 0l-.548.547A3.374 3.374 0 0014 18.469V19a2 2 0 11-4 0v-.531c0-.895-.356-1.754-.988-2.386l-.548-.547z"/></svg>
+            </div>
+            <h3 class="font-semibold mb-2" style="color:var(--text-primary)">Knowledge Sharing</h3>
+            <p class="text-sm leading-relaxed" style="color:var(--text-secondary)">Access tutorials, discussions, and resources curated by the VectorForgeML team.</p>
+          </div>
+          <div>
+            <div class="feature-icon mb-3">
+              <svg class="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M13 7h8m0 0v8m0-8l-8 8-4-4-6 6"/></svg>
+            </div>
+            <h3 class="font-semibold mb-2" style="color:var(--text-primary)">Career Growth</h3>
+            <p class="text-sm leading-relaxed" style="color:var(--text-secondary)">Build your professional network and enhance your portfolio with community-driven work.</p>
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- Footer -->
+  <div id="footer-container"></div>
+
+  <!-- Scripts -->
+  <script src="assets/js/main.js"></script>
+  <script src="assets/js/community.js"></script>
+  <script src="assets/js/chatbot.js"></script>
+</body>
+</html>
