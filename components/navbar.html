@@ -1,41 +1,39 @@
-<!-- VectorForgeML - Navbar Component -->
-<nav class="nav-bar">
+<!-- VectorForgeML - Navbar Component v2.0 -->
+<nav class="nav-bar" role="navigation" aria-label="Main navigation">
   <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
-    <div class="flex items-center justify-between h-16">
+    <div class="flex items-center justify-between h-20">
 
       <!-- Logo & Brand -->
-      <a href="index.html" class="flex items-center gap-2 font-bold text-lg no-underline" id="nav-brand" style="color:var(--text-primary)">
-        <img src="assets/images/VectorForgeML_Logo.png" alt="VectorForgeML Logo" class="nav-logo" onerror="this.style.display='none';this.nextElementSibling.style.display='flex';" />
-        <div class="w-8 h-8 rounded-lg bg-gradient-to-br from-blue-500 to-cyan-400 items-center justify-center text-white font-bold text-sm flex-shrink-0" style="display:none;">VF</div>
-        <span class="text-base sm:text-lg">VectorForgeML</span>
+      <a href="index.html" class="flex items-center gap-2.5 font-bold text-xl no-underline" id="nav-brand" style="color:var(--text-primary)" aria-label="VectorForgeML Home">
+        <img src="assets/images/VectorForgeML_Logo.png" alt="VectorForgeML Logo" class="nav-logo" loading="lazy" onerror="this.style.display='none';this.nextElementSibling.style.display='flex';" />
+        <div class="w-9 h-9 rounded-lg bg-gradient-to-br from-sky-500 to-blue-800 items-center justify-center text-white font-bold text-sm flex-shrink-0" style="display:none;">VF</div>
+        <span class="text-lg sm:text-xl font-bold">VectorForge<span class="gradient-text">ML</span></span>
       </a>
 
       <!-- Desktop Navigation -->
-      <div class="hidden md:flex items-center gap-5">
+      <div class="hidden md:flex items-center gap-7">
         <a href="index.html" class="nav-link" data-page="index.html">Home</a>
         <a href="about.html" class="nav-link" data-page="about.html">About</a>
         <a href="internships.html" class="nav-link" data-page="internships.html">Internships</a>
+        <a href="apply.html" class="nav-link" data-page="apply.html">Apply</a>
         <a href="community.html" class="nav-link" data-page="community.html">Community</a>
         <a href="verify.html" class="nav-link" data-page="verify.html">Verify</a>
         <a href="contact.html" class="nav-link" data-page="contact.html">Contact</a>
 
         <!-- Theme Toggle -->
-        <button id="theme-toggle" class="theme-toggle-btn" aria-label="Toggle theme">
-          <!-- Sun icon (shown in dark mode) -->
+        <button id="theme-toggle" class="theme-toggle-btn" aria-label="Toggle dark mode">
           <svg id="theme-icon-sun" class="w-5 h-5 hidden" fill="none" stroke="currentColor" viewBox="0 0 24 24">
             <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M12 3v1m0 16v1m9-9h-1M4 12H3m15.364 6.364l-.707-.707M6.343 6.343l-.707-.707m12.728 0l-.707.707M6.343 17.657l-.707.707M16 12a4 4 0 11-8 0 4 4 0 018 0z"/>
           </svg>
-          <!-- Moon icon (shown in light mode) -->
           <svg id="theme-icon-moon" class="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24">
             <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M20.354 15.354A9 9 0 018.646 3.646 9.003 9.003 0 0012 21a9.003 9.003 0 008.354-5.646z"/>
           </svg>
         </button>
       </div>
 
-      <!-- Mobile Hamburger -->
+      <!-- Mobile Controls -->
       <div class="flex items-center gap-2 md:hidden">
-        <!-- Mobile Theme Toggle -->
-        <button id="theme-toggle-mobile" class="theme-toggle-btn" aria-label="Toggle theme">
+        <button id="theme-toggle-mobile" class="theme-toggle-btn" aria-label="Toggle dark mode">
           <svg id="theme-icon-sun-mobile" class="w-5 h-5 hidden" fill="none" stroke="currentColor" viewBox="0 0 24 24">
             <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M12 3v1m0 16v1m9-9h-1M4 12H3m15.364 6.364l-.707-.707M6.343 6.343l-.707-.707m12.728 0l-.707.707M6.343 17.657l-.707.707M16 12a4 4 0 11-8 0 4 4 0 018 0z"/>
           </svg>
@@ -43,9 +41,8 @@
             <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M20.354 15.354A9 9 0 018.646 3.646 9.003 9.003 0 0012 21a9.003 9.003 0 008.354-5.646z"/>
           </svg>
         </button>
-
-        <button id="mobile-menu-btn" class="p-2" style="color:var(--text-muted)" aria-label="Open menu">
-          <svg class="w-6 h-6" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+        <button id="mobile-menu-btn" class="p-2" style="color:var(--text-muted)" aria-label="Open navigation menu">
+          <svg class="w-7 h-7" fill="none" stroke="currentColor" viewBox="0 0 24 24">
             <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M4 6h16M4 12h16M4 18h16"/>
           </svg>
         </button>
@@ -54,22 +51,23 @@
   </div>
 
   <!-- Mobile Full-Screen Menu -->
-  <div id="mobile-menu" class="mobile-menu fixed inset-0 z-50 flex flex-col md:hidden">
-    <div class="flex items-center justify-between px-4 h-16 border-b" style="border-color:var(--glass-border)">
-      <span class="font-bold text-lg" style="color:var(--text-primary)">VectorForgeML</span>
-      <button id="mobile-menu-close" class="p-2" style="color:var(--text-muted)" aria-label="Close menu">
-        <svg class="w-6 h-6" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+  <div id="mobile-menu" class="mobile-menu fixed inset-0 z-50 flex flex-col md:hidden" role="dialog" aria-label="Mobile navigation">
+    <div class="flex items-center justify-between px-4 h-20 border-b" style="border-color:var(--glass-border)">
+      <span class="font-bold text-xl" style="color:var(--text-primary)">VectorForge<span class="gradient-text">ML</span></span>
+      <button id="mobile-menu-close" class="p-2" style="color:var(--text-muted)" aria-label="Close navigation menu">
+        <svg class="w-7 h-7" fill="none" stroke="currentColor" viewBox="0 0 24 24">
           <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M6 18L18 6M6 6l12 12"/>
         </svg>
       </button>
     </div>
-    <div class="flex flex-col gap-2 p-6">
-      <a href="index.html" class="text-lg py-3 border-b transition-colors" style="color:var(--text-secondary);border-color:var(--glass-border)">Home</a>
-      <a href="about.html" class="text-lg py-3 border-b transition-colors" style="color:var(--text-secondary);border-color:var(--glass-border)">About</a>
-      <a href="internships.html" class="text-lg py-3 border-b transition-colors" style="color:var(--text-secondary);border-color:var(--glass-border)">Internships</a>
-      <a href="community.html" class="text-lg py-3 border-b transition-colors" style="color:var(--text-secondary);border-color:var(--glass-border)">Community</a>
-      <a href="verify.html" class="text-lg py-3 border-b transition-colors" style="color:var(--text-secondary);border-color:var(--glass-border)">Verify Certificate</a>
-      <a href="contact.html" class="text-lg py-3 transition-colors" style="color:var(--text-secondary)">Contact</a>
+    <div class="flex flex-col gap-1 p-6">
+      <a href="index.html" class="text-lg py-3 px-2 border-b transition-colors font-medium" style="color:var(--text-secondary);border-color:var(--glass-border)">Home</a>
+      <a href="about.html" class="text-lg py-3 px-2 border-b transition-colors font-medium" style="color:var(--text-secondary);border-color:var(--glass-border)">About</a>
+      <a href="internships.html" class="text-lg py-3 px-2 border-b transition-colors font-medium" style="color:var(--text-secondary);border-color:var(--glass-border)">Internships</a>
+      <a href="apply.html" class="text-lg py-3 px-2 border-b transition-colors font-medium" style="color:var(--text-secondary);border-color:var(--glass-border)">Apply Now</a>
+      <a href="community.html" class="text-lg py-3 px-2 border-b transition-colors font-medium" style="color:var(--text-secondary);border-color:var(--glass-border)">Community</a>
+      <a href="verify.html" class="text-lg py-3 px-2 border-b transition-colors font-medium" style="color:var(--text-secondary);border-color:var(--glass-border)">Verify Certificate</a>
+      <a href="contact.html" class="text-lg py-3 px-2 transition-colors font-medium" style="color:var(--text-secondary)">Contact</a>
     </div>
   </div>
 </nav>

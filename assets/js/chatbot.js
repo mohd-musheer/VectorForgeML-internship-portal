@@ -38,7 +38,7 @@
     {
       keywords: ['how to apply', 'apply', 'application', 'register', 'sign up', 'enroll'],
       answer:
-        'To apply for the internship, send an email to vectorforgeml@yahoo.com with your resume and area of interest (Machine Learning or Data Analysis). You will receive further instructions via email.',
+        'You can apply directly through our website! Visit the Apply page (apply.html) and fill out the application form. It\'s completely free and takes less than 2 minutes.',
     },
     {
       keywords: ['duration', 'how long', 'weeks', 'time period', 'length'],

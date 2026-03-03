@@ -180,6 +180,108 @@
   }
 
   /* ----------------------------------------
+     Animated Counters (IntersectionObserver)
+     Counts from 0 to data-target on .counter-number elements
+  ---------------------------------------- */
+  function initAnimatedCounters() {
+    const counters = document.querySelectorAll('.counter-number');
+    if (!counters.length) return;
+
+    const observer = new IntersectionObserver(
+      (entries) => {
+        entries.forEach((entry) => {
+          if (entry.isIntersecting) {
+            const el = entry.target;
+            const target = parseInt(el.getAttribute('data-target'), 10) || 0;
+            animateCounter(el, target);
+            observer.unobserve(el);
+          }
+        });
+      },
+      { threshold: 0.3 }
+    );
+
+    counters.forEach((el) => observer.observe(el));
+  }
+
+  function animateCounter(el, target) {
+    const duration = 2000; // ms
+    const startTime = performance.now();
+
+    function update(currentTime) {
+      const elapsed = currentTime - startTime;
+      const progress = Math.min(elapsed / duration, 1);
+      // Ease-out cubic
+      const eased = 1 - Math.pow(1 - progress, 3);
+      const current = Math.round(eased * target);
+      el.textContent = current.toLocaleString() + (target >= 100 ? '+' : '+');
+      if (progress < 1) {
+        requestAnimationFrame(update);
+      }
+    }
+
+    requestAnimationFrame(update);
+  }
+
+  /* ----------------------------------------
+     FAQ Accordion
+  ---------------------------------------- */
+  function initFAQAccordion() {
+    const faqContainer = document.getElementById('faq-container');
+    if (!faqContainer) return;
+
+    faqContainer.addEventListener('click', function (e) {
+      const questionBtn = e.target.closest('.faq-question');
+      if (!questionBtn) return;
+
+      const faqItem = questionBtn.closest('.faq-item');
+      const isOpen = faqItem.classList.contains('open');
+
+      // Close all open items
+      faqContainer.querySelectorAll('.faq-item.open').forEach((item) => {
+        item.classList.remove('open');
+        item.querySelector('.faq-question').setAttribute('aria-expanded', 'false');
+      });
+
+      // Open clicked item (if it was closed)
+      if (!isOpen) {
+        faqItem.classList.add('open');
+        questionBtn.setAttribute('aria-expanded', 'true');
+      }
+    });
+  }
+
+  /* ----------------------------------------
+     Floating Apply Button - hide when at hero or footer
+  ---------------------------------------- */
+  function initFloatingButton() {
+    const btn = document.querySelector('.floating-apply-btn');
+    if (!btn) return;
+
+    let ticking = false;
+    window.addEventListener('scroll', function () {
+      if (!ticking) {
+        requestAnimationFrame(function () {
+          const scrollY = window.scrollY;
+          const windowHeight = window.innerHeight;
+          const docHeight = document.documentElement.scrollHeight;
+
+          // Hide at very top and very bottom
+          if (scrollY < 200 || scrollY + windowHeight > docHeight - 100) {
+            btn.style.opacity = '0';
+            btn.style.pointerEvents = 'none';
+          } else {
+            btn.style.opacity = '1';
+            btn.style.pointerEvents = 'auto';
+          }
+          ticking = false;
+        });
+        ticking = true;
+      }
+    });
+  }
+
+  /* ----------------------------------------
      Resolve base path for components
      Works from root-level and subdirectory pages
   ---------------------------------------- */
@@ -203,6 +305,15 @@
 
     // Initialize scroll animations
     initScrollAnimations();
+
+    // Initialize animated counters
+    initAnimatedCounters();
+
+    // Initialize FAQ accordion
+    initFAQAccordion();
+
+    // Initialize floating apply button
+    initFloatingButton();
 
     // Re-init animations after a short delay (for dynamically loaded content)
     setTimeout(initScrollAnimations, 500);
