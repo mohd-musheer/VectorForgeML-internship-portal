@@ -1,7 +1,7 @@
 (function () {
   'use strict';
 
-  const API_BASE_URL = 'https://script.google.com/macros/s/AKfycbwO30i9rYXdv0IDQ9sBWQMGM2l2pnTn5nLS69Sa7oI-iGwjHHVNYAcfv2A6KcTUfzlgug/exec';
+  const API_BASE_URL = 'https://script.google.com/macros/s/AKfycbzkq7QO3z8Ey0cVXIjJj_k4iO2Y6ufU6iizMOps5o_SIpI-mQ_LtYwqkSBusdv3ovP5OQ/exec';
   const RESULT_CONTAINER_ID = 'verify-result';
 
   function getCertificateIdFromURL() {
@@ -50,8 +50,37 @@
     </a>`;
   }
 
+  function renderIncomplete(container, data) {
+    container.innerHTML = `
+      <div class="glass-card p-6 md:p-8 max-w-lg mx-auto text-center">
+        <div class="inline-flex items-center gap-2 px-4 py-1.5 rounded-full text-sm font-semibold mx-auto mb-4" style="background:rgba(234,179,8,0.1);color:#eab308;border:1px solid rgba(234,179,8,0.3)">
+          <svg class="w-5 h-5" fill="currentColor" viewBox="0 0 20 20">
+            <path fill-rule="evenodd" d="M8.257 3.099c.765-1.36 2.722-1.36 3.486 0l5.58 9.92c.75 1.334-.213 2.98-1.742 2.98H4.42c-1.53 0-2.493-1.646-1.743-2.98l5.58-9.92zM11 13a1 1 0 11-2 0 1 1 0 012 0zm-1-8a1 1 0 00-1 1v3a1 1 0 002 0V6a1 1 0 00-1-1z" clip-rule="evenodd"/>
+          </svg>
+          Registered — Internship Incomplete
+        </div>
+        <h3 class="text-xl font-bold mb-2" style="color:var(--text-primary)">${escapeHTML(data.fullName)}</h3>
+        <p class="mb-4 text-sm" style="color:var(--text-secondary)">This intern is registered but has not yet completed the internship. Certificate will be available after completion.</p>
+        <div class="space-y-3 text-left">
+          <div class="flex justify-between py-2" style="border-bottom:1px solid var(--glass-border)">
+            <span style="color:var(--text-secondary)">Certificate ID</span>
+            <span class="text-cyan-400 font-mono text-sm">${escapeHTML(data.id)}</span>
+          </div>
+          <div class="flex justify-between py-2" style="border-bottom:1px solid var(--glass-border)">
+            <span style="color:var(--text-secondary)">Track</span>
+            <span style="color:var(--text-primary)">${escapeHTML(data.track)}</span>
+          </div>
+          <div class="flex justify-between py-2">
+            <span style="color:var(--text-secondary)">Status</span>
+            <span class="text-yellow-400 font-semibold">In Progress</span>
+          </div>
+        </div>
+      </div>
+    `;
+  }
+
   function renderResult(container, data) {
-    if (data && data.found === true && data.fullName) {
+    if (data && data.found === true && data.fullName && data.completed === true) {
       const duration = formatDuration(data.startDate, data.endDate);
       const certBtn = downloadButton(data.certificatePDF, 'Download Certificate');
       const lorBtn = downloadButton(data.lorPDF, 'Download LOR');
@@ -95,6 +124,8 @@
           ${hasButtons ? `<div class="flex flex-wrap justify-center gap-3 mt-6">${certBtn}${lorBtn}</div>` : ''}
         </div>
       `;
+    } else if (data && data.found === true && data.fullName && !data.completed) {
+      renderIncomplete(container, data);
     } else {
       container.innerHTML = `
         <div class="glass-card p-6 md:p-8 max-w-lg mx-auto text-center">

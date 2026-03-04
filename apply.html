@@ -68,7 +68,7 @@
   <section class="section" aria-label="Application form">
     <div class="max-w-2xl mx-auto">
       <div class="glass-card p-8 sm:p-10 fade-in">
-        <form id="apply-form" novalidate>
+        <form id="apply-form">
           <!-- Honeypot -->
           <div class="honeypot-field" aria-hidden="true">
             <label for="website">Website</label>
@@ -82,7 +82,6 @@
               class="form-input"
               placeholder="e.g., Aarav Sharma"
               autocomplete="name" />
-            <p class="form-error hidden" id="name-error">Please enter your full name.</p>
           </div>
 
           <!-- Email -->
@@ -92,7 +91,6 @@
               class="form-input"
               placeholder="you@example.com"
               autocomplete="email" />
-            <p class="form-error hidden" id="email-error">Please enter a valid email address.</p>
           </div>
 
           <!-- Phone -->
@@ -102,7 +100,6 @@
               class="form-input"
               placeholder="+91 98765 43210"
               autocomplete="tel" />
-            <p class="form-error hidden" id="phone-error">Please enter a valid phone number.</p>
           </div>
 
           <!-- College / University -->
@@ -111,16 +108,52 @@
             <input type="text" id="college" name="college" required
               class="form-input"
               placeholder="e.g., IIT Bombay" />
-            <p class="form-error hidden" id="college-error">Please enter your college or university name.</p>
           </div>
 
           <!-- Country -->
           <div class="mb-6">
             <label for="country" class="form-label">Country <span class="text-red-500">*</span></label>
-            <input type="text" id="country" name="country" required
-              class="form-input"
-              placeholder="e.g., India" />
-            <p class="form-error hidden" id="country-error">Please enter your country.</p>
+            <select id="country" name="country" required class="form-input">
+              <option value="" disabled selected>Select your country</option>
+              <option value="India">India</option>
+              <option value="United States">United States</option>
+              <option value="United Kingdom">United Kingdom</option>
+              <option value="Canada">Canada</option>
+              <option value="Australia">Australia</option>
+              <option value="Germany">Germany</option>
+              <option value="France">France</option>
+              <option value="China">China</option>
+              <option value="Japan">Japan</option>
+              <option value="South Korea">South Korea</option>
+              <option value="Singapore">Singapore</option>
+              <option value="Malaysia">Malaysia</option>
+              <option value="Indonesia">Indonesia</option>
+              <option value="Bangladesh">Bangladesh</option>
+              <option value="Pakistan">Pakistan</option>
+              <option value="Sri Lanka">Sri Lanka</option>
+              <option value="Nepal">Nepal</option>
+              <option value="Nigeria">Nigeria</option>
+              <option value="South Africa">South Africa</option>
+              <option value="Kenya">Kenya</option>
+              <option value="Ghana">Ghana</option>
+              <option value="Egypt">Egypt</option>
+              <option value="Brazil">Brazil</option>
+              <option value="Mexico">Mexico</option>
+              <option value="UAE">UAE</option>
+              <option value="Saudi Arabia">Saudi Arabia</option>
+              <option value="Philippines">Philippines</option>
+              <option value="Vietnam">Vietnam</option>
+              <option value="Thailand">Thailand</option>
+              <option value="Russia">Russia</option>
+              <option value="Italy">Italy</option>
+              <option value="Spain">Spain</option>
+              <option value="Netherlands">Netherlands</option>
+              <option value="Sweden">Sweden</option>
+              <option value="Switzerland">Switzerland</option>
+              <option value="New Zealand">New Zealand</option>
+              <option value="Ireland">Ireland</option>
+              <option value="Other">Other</option>
+            </select>
           </div>
 
           <!-- Branch -->
@@ -129,7 +162,6 @@
             <input type="text" id="branch" name="branch" required
               class="form-input"
               placeholder="e.g., Computer Science, Data Science" />
-            <p class="form-error hidden" id="branch-error">Please enter your branch or field of study.</p>
           </div>
 
           <!-- Preferred Track -->
@@ -140,24 +172,15 @@
               <option value="Machine Learning">Machine Learning</option>
               <option value="Data Analysis">Data Analysis</option>
             </select>
-            <p class="form-error hidden" id="track-error">Please select a track.</p>
           </div>
 
           <!-- LinkedIn URL -->
-          <div class="mb-6">
+          <div class="mb-8">
             <label for="linkedin" class="form-label">LinkedIn Profile URL</label>
             <input type="url" id="linkedin" name="linkedin"
               class="form-input"
               placeholder="https://linkedin.com/in/yourprofile"
               autocomplete="url" />
-          </div>
-
-          <!-- Message -->
-          <div class="mb-8">
-            <label for="message" class="form-label">Why do you want to join? (Optional)</label>
-            <textarea id="message" name="message" rows="4"
-              class="form-input resize-none"
-              placeholder="Tell us briefly about your motivation and goals..."></textarea>
           </div>
 
           <!-- Submit Button -->
@@ -188,6 +211,20 @@
     </div>
   </div>
 
+  <!-- ==================== DUPLICATE OVERLAY ==================== -->
+  <div id="duplicate-overlay" class="success-overlay hidden" role="dialog" aria-modal="true" aria-label="Duplicate application">
+    <div class="success-modal">
+      <div class="w-20 h-20 rounded-full flex items-center justify-center mx-auto" style="background: rgba(239,68,68,0.1)">
+        <svg class="w-14 h-14 text-red-500" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+          <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2.5" d="M12 9v2m0 4h.01M12 3a9 9 0 100 18 9 9 0 000-18z"/>
+        </svg>
+      </div>
+      <h3 class="text-2xl font-bold mt-6 mb-3" style="color:var(--text-primary)">Already Registered!</h3>
+      <p id="duplicate-msg" class="mb-6" style="color:var(--text-secondary)"></p>
+      <button onclick="document.getElementById('duplicate-overlay').classList.add('hidden');document.getElementById('duplicate-overlay').classList.remove('active');" class="btn-primary px-8 py-3">Go Back</button>
+    </div>
+  </div>
+
   <!-- Footer -->
   <div id="footer-container"></div>
 
@@ -203,49 +240,10 @@
     const btnText = document.getElementById('btn-text');
     const btnSpinner = document.getElementById('btn-spinner');
     const overlay = document.getElementById('success-overlay');
-    const ENDPOINT = 'https://script.google.com/macros/s/AKfycbyZ7dMvr7IcLCYOVva-bTWoMdkMdopXqk3VidCMUZcVlUKFMXOxMjw4mCzyoehKrLyRyQ/exec';
+    const ENDPOINT = 'https://script.google.com/macros/s/AKfycbzkq7QO3z8Ey0cVXIjJj_k4iO2Y6ufU6iizMOps5o_SIpI-mQ_LtYwqkSBusdv3ovP5OQ/exec';
 
-    // Validation helpers
-    function showError(fieldId, errorId) {
-      document.getElementById(fieldId)?.classList.add('border-red-500');
-      document.getElementById(errorId)?.classList.remove('hidden');
-    }
-    function clearError(fieldId, errorId) {
-      document.getElementById(fieldId)?.classList.remove('border-red-500');
-      document.getElementById(errorId)?.classList.add('hidden');
-    }
-    function clearAllErrors() {
-      document.querySelectorAll('.form-error').forEach(e => e.classList.add('hidden'));
-      document.querySelectorAll('.form-input').forEach(e => e.classList.remove('border-red-500'));
-    }
-
-    function validateForm() {
-      let valid = true;
-      clearAllErrors();
-
-      const name = document.getElementById('full-name');
-      if (!name.value.trim()) { showError('full-name','name-error'); valid = false; }
-
-      const email = document.getElementById('email');
-      if (!email.value.trim() || !/^[^\s@]+@[^\s@]+\.[^\s@]+$/.test(email.value)) { showError('email','email-error'); valid = false; }
-
-      const phone = document.getElementById('phone');
-      if (!phone.value.trim() || phone.value.replace(/\D/g,'').length < 7) { showError('phone','phone-error'); valid = false; }
-
-      const college = document.getElementById('college');
-      if (!college.value.trim()) { showError('college','college-error'); valid = false; }
-
-      const country = document.getElementById('country');
-      if (!country.value.trim()) { showError('country','country-error'); valid = false; }
-
-      const branch = document.getElementById('branch');
-      if (!branch.value.trim()) { showError('branch','branch-error'); valid = false; }
-
-      const track = document.getElementById('track');
-      if (!track.value) { showError('track','track-error'); valid = false; }
-
-      return valid;
-    }
+    const dupOverlay = document.getElementById('duplicate-overlay');
+    const dupMsg = document.getElementById('duplicate-msg');
 
     form.addEventListener('submit', async function(e) {
       e.preventDefault();
@@ -254,61 +252,49 @@
       const honeypot = document.getElementById('website');
       if (honeypot && honeypot.value) return;
 
-      if (!validateForm()) return;
-
       // Show spinner
       btnText.textContent = 'Submitting...';
       btnSpinner.classList.remove('hidden');
       submitBtn.disabled = true;
       submitBtn.style.opacity = '0.7';
 
+      const trackVal = document.getElementById('track').value;
+      const trackLabel = trackVal === 'MachineLearning' ? 'Machine Learning' : 'Data Analysis';
+
       const payload = new FormData();
       payload.append('fullName', document.getElementById('full-name').value.trim());
       payload.append('email', document.getElementById('email').value.trim());
       payload.append('phone', document.getElementById('phone').value.trim());
       payload.append('college', document.getElementById('college').value.trim());
-      payload.append('country', document.getElementById('country').value.trim());
+      payload.append('country', document.getElementById('country').value);
       payload.append('branch', document.getElementById('branch').value.trim());
-      payload.append('track', document.getElementById('track').value);
+      payload.append('track', trackVal);
       payload.append('linkedin', document.getElementById('linkedin').value.trim());
-      payload.append('message', document.getElementById('message').value.trim());
 
       try {
-        const resp = await fetch(ENDPOINT, {
-          method: 'POST',
-          body: payload
-        });
+        const resp = await fetch(ENDPOINT, { method: 'POST', body: payload });
+        const data = await resp.json();
 
-        if (resp.ok || resp.type === 'opaque') {
-          // Show success modal
+        if (data.status === 'duplicate') {
+          dupMsg.textContent = data.message;
+          dupOverlay.classList.remove('hidden');
+          dupOverlay.classList.add('active');
+        } else {
           overlay.classList.remove('hidden');
           overlay.classList.add('active');
           form.reset();
-        } else {
-          throw new Error('Network response was not ok');
         }
       } catch (err) {
-        // Even if fetch fails due to CORS on Apps Script, the data is typically submitted
+        // CORS redirect — data is submitted, show success
         overlay.classList.remove('hidden');
         overlay.classList.add('active');
         form.reset();
-      } finally {
-        btnText.textContent = 'Submit Application';
-        btnSpinner.classList.add('hidden');
-        submitBtn.disabled = false;
-        submitBtn.style.opacity = '1';
       }
-    });
 
-    // Real-time validation on blur
-    document.querySelectorAll('#apply-form .form-input').forEach(input => {
-      input.addEventListener('blur', function() {
-        const id = this.id;
-        const errorId = id + '-error';
-        if (this.value.trim()) {
-          clearError(id, errorId);
-        }
-      });
+      btnText.textContent = 'Submit Application';
+      btnSpinner.classList.add('hidden');
+      submitBtn.disabled = false;
+      submitBtn.style.opacity = '1';
     });
   })();
   </script>
