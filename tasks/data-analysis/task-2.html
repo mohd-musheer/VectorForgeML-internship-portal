@@ -1,0 +1,954 @@
+<!DOCTYPE html>
+<html lang="en" class="light">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Task 2 – Customer Purchase Behavior Analysis | Data Analysis Internship — VectorForgeML</title>
+  <meta name="description" content="VectorForgeML Data Analysis Internship Task 2 – Customer Purchase Behavior Analysis. Learn to analyze customer data and build segmentation dashboards." />
+  <meta name="robots" content="noindex, nofollow" />
+
+  <meta property="og:title" content="Task 2 – Customer Purchase Behavior Analysis | VectorForgeML" />
+  <meta property="og:description" content="Analyze customer purchase datasets and discover behavior patterns using Python, Pandas, and visualization tools." />
+  <meta property="og:image" content="https://vectorforgeml.work.gd/assets/images/VectorForgeML_Logo.png" />
+
+  <script src="https://cdn.tailwindcss.com"></script>
+  <script>tailwind.config = { darkMode: 'class' };</script>
+
+  <link rel="preconnect" href="https://fonts.googleapis.com" />
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+  <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;500;600;700;800&family=Inter:wght@300;400;500;600;700;800&display=swap" rel="stylesheet" />
+  <link rel="icon" type="image/png" href="../../assets/images/VectorForgeML_Logo.png" />
+  <link rel="stylesheet" href="../../assets/css/styles.css" />
+
+  <style>
+    .task-hero {
+      background: linear-gradient(135deg, #0f172a 0%, #1e3a5f 50%, #0c4a6e 100%);
+      position: relative;
+      overflow: hidden;
+    }
+    .task-hero::before {
+      content: '';
+      position: absolute;
+      inset: 0;
+      background:
+        radial-gradient(ellipse at 20% 20%, rgba(14, 165, 233, 0.15) 0%, transparent 50%),
+        radial-gradient(ellipse at 80% 80%, rgba(139, 92, 246, 0.1) 0%, transparent 50%),
+        radial-gradient(ellipse at 50% 50%, rgba(6, 182, 212, 0.08) 0%, transparent 60%);
+    }
+    .task-hero::after {
+      content: '';
+      position: absolute;
+      inset: 0;
+      background-image: url("data:image/svg+xml,%3Csvg width='60' height='60' viewBox='0 0 60 60' xmlns='http://www.w3.org/2000/svg'%3E%3Cg fill='none' fill-rule='evenodd'%3E%3Cg fill='%23ffffff' fill-opacity='0.03'%3E%3Cpath d='M36 34v-4h-2v4h-4v2h4v4h2v-4h4v-2h-4zm0-30V0h-2v4h-4v2h4v4h2V6h4V4h-4zM6 34v-4H4v4H0v2h4v4h2v-4h4v-2H6zM6 4V0H4v4H0v2h4v4h2V6h4V4H6z'/%3E%3C/g%3E%3C/g%3E%3C/svg%3E");
+    }
+    .section-gradient {
+      background: linear-gradient(180deg, var(--bg-primary) 0%, rgba(14, 165, 233, 0.03) 50%, var(--bg-primary) 100%);
+    }
+    .task-badge {
+      background: linear-gradient(135deg, rgba(14, 165, 233, 0.2), rgba(139, 92, 246, 0.2));
+      border: 1px solid rgba(14, 165, 233, 0.3);
+    }
+    .section-card {
+      background: var(--glass-bg);
+      backdrop-filter: blur(16px);
+      border: 1px solid var(--glass-border);
+      border-radius: 1.5rem;
+      box-shadow: var(--shadow-glow);
+      transition: all 0.35s cubic-bezier(.4,0,.2,1);
+    }
+    .section-card:hover {
+      box-shadow: var(--card-hover-shadow);
+      border-color: rgba(14, 165, 233, 0.25);
+    }
+    .section-icon {
+      width: 56px;
+      height: 56px;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      border-radius: 1rem;
+      background: linear-gradient(135deg, rgba(14, 165, 233, 0.15), rgba(139, 92, 246, 0.12));
+      color: var(--accent-blue);
+      flex-shrink: 0;
+    }
+    .dataset-card {
+      background: var(--glass-bg);
+      backdrop-filter: blur(12px);
+      border: 1px solid var(--glass-border);
+      border-radius: 1.25rem;
+      overflow: hidden;
+      transition: all 0.35s ease;
+    }
+    .dataset-card:hover {
+      transform: translateY(-6px);
+      box-shadow: 0 12px 40px rgba(14, 165, 233, 0.15);
+      border-color: rgba(14, 165, 233, 0.3);
+    }
+    .dataset-card-header {
+      background: linear-gradient(135deg, rgba(14, 165, 233, 0.1), rgba(139, 92, 246, 0.08));
+      padding: 1.25rem;
+      border-bottom: 1px solid var(--glass-border);
+    }
+    .dataset-number {
+      width: 36px;
+      height: 36px;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      border-radius: 0.75rem;
+      background: linear-gradient(135deg, var(--gradient-start), var(--gradient-end));
+      color: white;
+      font-weight: 700;
+      font-size: 0.9rem;
+    }
+    .tool-badge {
+      display: inline-flex;
+      align-items: center;
+      gap: 0.5rem;
+      padding: 0.75rem 1rem;
+      background: var(--section-alt-bg);
+      border: 1px solid var(--glass-border);
+      border-radius: 0.75rem;
+      transition: all 0.25s ease;
+    }
+    .tool-badge:hover {
+      border-color: rgba(14, 165, 233, 0.3);
+      background: rgba(14, 165, 233, 0.05);
+    }
+    .tool-icon {
+      width: 32px;
+      height: 32px;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      border-radius: 0.5rem;
+      font-weight: 700;
+      font-size: 0.7rem;
+    }
+    .feature-check {
+      display: flex;
+      align-items: flex-start;
+      gap: 0.75rem;
+      padding: 0.875rem 1rem;
+      background: rgba(16, 185, 129, 0.05);
+      border: 1px solid rgba(16, 185, 129, 0.15);
+      border-radius: 0.75rem;
+      transition: all 0.25s ease;
+    }
+    .feature-check:hover {
+      background: rgba(16, 185, 129, 0.08);
+      border-color: rgba(16, 185, 129, 0.25);
+    }
+    .check-icon {
+      width: 24px;
+      height: 24px;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      border-radius: 50%;
+      background: rgba(16, 185, 129, 0.15);
+      color: #10b981;
+      flex-shrink: 0;
+    }
+    .optional-feature {
+      display: flex;
+      align-items: center;
+      gap: 0.75rem;
+      padding: 0.75rem 1rem;
+      background: rgba(139, 92, 246, 0.05);
+      border: 1px solid rgba(139, 92, 246, 0.15);
+      border-radius: 0.75rem;
+    }
+    .code-block {
+      background: #0f172a;
+      border-radius: 1rem;
+      overflow: hidden;
+      font-family: 'Fira Code', 'Monaco', 'Consolas', monospace;
+    }
+    .code-header {
+      background: rgba(255, 255, 255, 0.05);
+      padding: 0.75rem 1rem;
+      border-bottom: 1px solid rgba(255, 255, 255, 0.1);
+      display: flex;
+      align-items: center;
+      gap: 0.5rem;
+    }
+    .code-dot { width: 12px; height: 12px; border-radius: 50%; }
+    .code-content {
+      padding: 1.25rem;
+      color: #e2e8f0;
+      font-size: 0.85rem;
+      line-height: 1.8;
+      overflow-x: auto;
+    }
+    .code-comment { color: #64748b; }
+    .code-folder { color: #38bdf8; }
+    .code-file { color: #a5b4fc; }
+    .linkedin-card {
+      background: linear-gradient(135deg, rgba(0, 119, 181, 0.08), rgba(0, 119, 181, 0.03));
+      border: 1px solid rgba(0, 119, 181, 0.2);
+      border-radius: 1rem;
+      padding: 1.5rem;
+    }
+    .why-card {
+      background: linear-gradient(135deg, rgba(14, 165, 233, 0.08), rgba(139, 92, 246, 0.05));
+      border: 1px solid rgba(14, 165, 233, 0.15);
+      border-radius: 1rem;
+      padding: 1.25rem;
+      transition: all 0.3s ease;
+    }
+    .why-card:hover {
+      border-color: rgba(14, 165, 233, 0.3);
+      transform: translateY(-2px);
+    }
+    .floating-shape {
+      position: absolute;
+      border-radius: 50%;
+      filter: blur(60px);
+      pointer-events: none;
+      opacity: 0.5;
+    }
+    .hero-illustration {
+      max-width: 400px;
+      width: 100%;
+      filter: drop-shadow(0 20px 40px rgba(0, 0, 0, 0.3));
+    }
+    @media (max-width: 768px) {
+      .hero-illustration { max-width: 280px; }
+    }
+    .scroll-progress {
+      position: fixed;
+      top: 0;
+      left: 0;
+      height: 3px;
+      background: linear-gradient(90deg, var(--gradient-start), var(--gradient-end));
+      z-index: 100;
+      transition: width 0.1s ease;
+    }
+  </style>
+</head>
+<body class="grid-pattern">
+
+  <div class="scroll-progress" id="scrollProgress"></div>
+
+  <!-- HERO SECTION -->
+  <section class="task-hero min-h-[85vh] flex items-center justify-center px-4 py-16 relative">
+    <div class="relative z-10 max-w-6xl mx-auto">
+      <div class="grid grid-cols-1 lg:grid-cols-2 gap-12 items-center">
+        <div class="text-center lg:text-left fade-in">
+          <div class="inline-flex items-center gap-2 px-4 py-2 rounded-full task-badge text-cyan-300 text-xs font-semibold mb-6">
+            <svg class="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+              <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M16 7a4 4 0 11-8 0 4 4 0 018 0zM12 14a7 7 0 00-7 7h14a7 7 0 00-7-7z"/>
+            </svg>
+            Data Analysis Internship
+          </div>
+
+          <h1 class="text-3xl sm:text-4xl md:text-5xl lg:text-6xl font-extrabold leading-tight mb-4 text-white">
+            <span class="bg-gradient-to-r from-cyan-400 via-blue-400 to-purple-400 bg-clip-text text-transparent">DATA ANALYSIS</span>
+            <br />
+            <span class="text-white/90">INTERNSHIP</span>
+          </h1>
+
+          <div class="inline-flex items-center gap-3 px-5 py-2.5 rounded-xl bg-white/10 backdrop-blur-sm border border-white/20 mb-6">
+            <span class="text-cyan-400 font-bold text-lg">Task 2</span>
+            <span class="w-1.5 h-1.5 rounded-full bg-cyan-400"></span>
+            <span class="text-white/80 text-sm sm:text-base font-medium">Customer Purchase Behavior Analysis</span>
+          </div>
+
+          <p class="text-base sm:text-lg text-white/70 leading-relaxed max-w-xl mx-auto lg:mx-0 mb-8">
+            Analyze customer purchase data to discover behavior patterns, segmentation insights, and business intelligence.
+          </p>
+
+          <div class="flex flex-col sm:flex-row items-center justify-center lg:justify-start gap-4">
+            <a href="#about-task" class="btn-primary text-base px-8 py-3.5 w-full sm:w-auto">
+              <svg class="w-5 h-5 mr-2" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M13 10V3L4 14h7v7l9-11h-7z"/>
+              </svg>
+              Get Started
+            </a>
+            <a href="#datasets" class="inline-flex items-center justify-center px-8 py-3.5 border-2 border-white/30 text-white font-semibold rounded-xl transition-all hover:bg-white/10 w-full sm:w-auto" style="text-decoration: none;">
+              View Datasets
+            </a>
+          </div>
+        </div>
+
+        <div class="flex items-center justify-center fade-in">
+          <svg viewBox="0 0 500 400" fill="none" xmlns="http://www.w3.org/2000/svg" class="hero-illustration">
+            <ellipse cx="250" cy="360" rx="180" ry="25" fill="rgba(14, 165, 233, 0.1)"/>
+            <!-- Shopping Cart / Customer Icon -->
+            <circle cx="250" cy="120" r="70" fill="#1e293b" stroke="rgba(14, 165, 233, 0.5)" stroke-width="2"/>
+            <circle cx="250" cy="100" r="25" fill="url(#custGrad1)"/>
+            <path d="M220 140 Q250 170 280 140" stroke="url(#custGrad1)" stroke-width="8" fill="none" stroke-linecap="round"/>
+            <!-- Customer Segments -->
+            <rect x="60" y="200" width="100" height="120" rx="12" fill="#1e293b" stroke="rgba(139, 92, 246, 0.4)" stroke-width="2"/>
+            <circle cx="110" cy="240" r="20" fill="rgba(139, 92, 246, 0.3)"/>
+            <rect x="85" y="270" width="50" height="8" rx="4" fill="rgba(139, 92, 246, 0.5)"/>
+            <rect x="90" y="285" width="40" height="6" rx="3" fill="rgba(139, 92, 246, 0.3)"/>
+            <text x="110" y="310" text-anchor="middle" fill="#a78bfa" font-size="10" font-weight="600">Segment A</text>
+
+            <rect x="200" y="200" width="100" height="120" rx="12" fill="#1e293b" stroke="rgba(14, 165, 233, 0.4)" stroke-width="2"/>
+            <circle cx="250" cy="240" r="20" fill="rgba(14, 165, 233, 0.3)"/>
+            <rect x="225" y="270" width="50" height="8" rx="4" fill="rgba(14, 165, 233, 0.5)"/>
+            <rect x="230" y="285" width="40" height="6" rx="3" fill="rgba(14, 165, 233, 0.3)"/>
+            <text x="250" y="310" text-anchor="middle" fill="#06b6d4" font-size="10" font-weight="600">Segment B</text>
+
+            <rect x="340" y="200" width="100" height="120" rx="12" fill="#1e293b" stroke="rgba(16, 185, 129, 0.4)" stroke-width="2"/>
+            <circle cx="390" cy="240" r="20" fill="rgba(16, 185, 129, 0.3)"/>
+            <rect x="365" y="270" width="50" height="8" rx="4" fill="rgba(16, 185, 129, 0.5)"/>
+            <rect x="370" y="285" width="40" height="6" rx="3" fill="rgba(16, 185, 129, 0.3)"/>
+            <text x="390" y="310" text-anchor="middle" fill="#10b981" font-size="10" font-weight="600">Segment C</text>
+
+            <!-- Connection Lines -->
+            <path d="M250 190 L110 200" stroke="rgba(139, 92, 246, 0.4)" stroke-width="2" stroke-dasharray="4"/>
+            <path d="M250 190 L250 200" stroke="rgba(14, 165, 233, 0.4)" stroke-width="2" stroke-dasharray="4"/>
+            <path d="M250 190 L390 200" stroke="rgba(16, 185, 129, 0.4)" stroke-width="2" stroke-dasharray="4"/>
+
+            <!-- Shopping Cart Icon -->
+            <rect x="40" y="80" width="50" height="50" rx="10" fill="rgba(251, 191, 36, 0.15)" stroke="rgba(251, 191, 36, 0.3)" stroke-width="1.5"/>
+            <path d="M52 95 h28 l-4 18 h-20 z" stroke="#fbbf24" stroke-width="2" fill="none"/>
+            <circle cx="58" cy="118" r="3" fill="#fbbf24"/>
+            <circle cx="72" cy="118" r="3" fill="#fbbf24"/>
+
+            <!-- Dollar Sign -->
+            <rect x="410" y="80" width="50" height="50" rx="10" fill="rgba(16, 185, 129, 0.15)" stroke="rgba(16, 185, 129, 0.3)" stroke-width="1.5"/>
+            <text x="435" y="112" text-anchor="middle" fill="#10b981" font-size="24" font-weight="bold">$</text>
+
+            <defs>
+              <linearGradient id="custGrad1" x1="0%" y1="0%" x2="100%" y2="100%">
+                <stop offset="0%" stop-color="#06b6d4"/>
+                <stop offset="100%" stop-color="#8b5cf6"/>
+              </linearGradient>
+            </defs>
+          </svg>
+        </div>
+      </div>
+    </div>
+    <div class="floating-shape w-64 h-64 bg-cyan-500/20 top-20 -left-32"></div>
+    <div class="floating-shape w-96 h-96 bg-purple-500/10 -bottom-48 -right-48"></div>
+  </section>
+
+  <!-- ABOUT THE TASK -->
+  <section id="about-task" class="section section-gradient">
+    <div class="max-w-4xl mx-auto">
+      <div class="section-card p-8 sm:p-10 fade-in">
+        <div class="flex items-start gap-5 mb-6">
+          <div class="section-icon">
+            <svg class="w-7 h-7" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+              <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M13 16h-1v-4h-1m1-4h.01M21 12a9 9 0 11-18 0 9 9 0 0118 0z"/>
+            </svg>
+          </div>
+          <div>
+            <h2 class="text-2xl sm:text-3xl font-bold mb-2" style="color: var(--text-primary)">About the Task</h2>
+            <p class="text-sm font-medium" style="color: var(--accent-blue)">Understanding customer behavior</p>
+          </div>
+        </div>
+        <div class="space-y-5" style="color: var(--text-secondary)">
+          <p class="leading-relaxed">
+            In modern businesses, companies collect <strong style="color: var(--text-primary)">large amounts of data about customer purchases and shopping behavior</strong>.
+          </p>
+          <p class="leading-relaxed">Understanding this data helps businesses answer important questions:</p>
+          <div class="grid grid-cols-1 sm:grid-cols-2 gap-3">
+            <div class="flex items-center gap-3 p-3 rounded-lg" style="background: var(--section-alt-bg)">
+              <svg class="w-5 h-5 text-cyan-500 flex-shrink-0" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M8.228 9c.549-1.165 2.03-2 3.772-2 2.21 0 4 1.343 4 3 0 1.4-1.278 2.575-3.006 2.907-.542.104-.994.54-.994 1.093m0 3h.01M21 12a9 9 0 11-18 0 9 9 0 0118 0z"/>
+              </svg>
+              <span class="text-sm" style="color: var(--text-primary)">Who are the most valuable customers?</span>
+            </div>
+            <div class="flex items-center gap-3 p-3 rounded-lg" style="background: var(--section-alt-bg)">
+              <svg class="w-5 h-5 text-purple-500 flex-shrink-0" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M8.228 9c.549-1.165 2.03-2 3.772-2 2.21 0 4 1.343 4 3 0 1.4-1.278 2.575-3.006 2.907-.542.104-.994.54-.994 1.093m0 3h.01M21 12a9 9 0 11-18 0 9 9 0 0118 0z"/>
+              </svg>
+              <span class="text-sm" style="color: var(--text-primary)">What products do customers buy together?</span>
+            </div>
+            <div class="flex items-center gap-3 p-3 rounded-lg" style="background: var(--section-alt-bg)">
+              <svg class="w-5 h-5 text-emerald-500 flex-shrink-0" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M8.228 9c.549-1.165 2.03-2 3.772-2 2.21 0 4 1.343 4 3 0 1.4-1.278 2.575-3.006 2.907-.542.104-.994.54-.994 1.093m0 3h.01M21 12a9 9 0 11-18 0 9 9 0 0118 0z"/>
+              </svg>
+              <span class="text-sm" style="color: var(--text-primary)">How does spending behavior vary?</span>
+            </div>
+            <div class="flex items-center gap-3 p-3 rounded-lg" style="background: var(--section-alt-bg)">
+              <svg class="w-5 h-5 text-amber-500 flex-shrink-0" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M8.228 9c.549-1.165 2.03-2 3.772-2 2.21 0 4 1.343 4 3 0 1.4-1.278 2.575-3.006 2.907-.542.104-.994.54-.994 1.093m0 3h.01M21 12a9 9 0 11-18 0 9 9 0 0118 0z"/>
+              </svg>
+              <span class="text-sm" style="color: var(--text-primary)">Which customer groups drive revenue?</span>
+            </div>
+          </div>
+          <p class="leading-relaxed">
+            In this task, you will analyze <strong style="color: var(--accent-blue)">customer purchase behavior datasets</strong> to discover patterns and insights that businesses can use to improve marketing strategies and customer engagement.
+          </p>
+          <div class="p-4 rounded-xl bg-gradient-to-r from-cyan-500/10 to-purple-500/10 border border-cyan-500/20">
+            <p class="text-sm font-medium" style="color: var(--text-primary)">
+              <svg class="w-5 h-5 inline mr-2 text-cyan-500" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M13 10V3L4 14h7v7l9-11h-7z"/>
+              </svg>
+              This is a common type of work performed by data analysts and business intelligence teams.
+            </p>
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- OBJECTIVE -->
+  <section class="section">
+    <div class="max-w-4xl mx-auto">
+      <div class="section-card p-8 sm:p-10 fade-in">
+        <div class="flex items-start gap-5 mb-6">
+          <div class="section-icon" style="background: linear-gradient(135deg, rgba(139, 92, 246, 0.15), rgba(236, 72, 153, 0.12));">
+            <svg class="w-7 h-7 text-purple-500" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+              <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 12l2 2 4-4M7.835 4.697a3.42 3.42 0 001.946-.806 3.42 3.42 0 014.438 0 3.42 3.42 0 001.946.806 3.42 3.42 0 013.138 3.138 3.42 3.42 0 00.806 1.946 3.42 3.42 0 010 4.438 3.42 3.42 0 00-.806 1.946 3.42 3.42 0 01-3.138 3.138 3.42 3.42 0 00-1.946.806 3.42 3.42 0 01-4.438 0 3.42 3.42 0 00-1.946-.806 3.42 3.42 0 01-3.138-3.138 3.42 3.42 0 00-.806-1.946 3.42 3.42 0 010-4.438 3.42 3.42 0 00.806-1.946 3.42 3.42 0 013.138-3.138z"/>
+            </svg>
+          </div>
+          <div>
+            <h2 class="text-2xl sm:text-3xl font-bold mb-2" style="color: var(--text-primary)">Objective</h2>
+            <p class="text-sm font-medium text-purple-500">Your mission for this task</p>
+          </div>
+        </div>
+        <p class="mb-6 leading-relaxed" style="color: var(--text-secondary)">
+          Your objective is to <strong style="color: var(--text-primary)">analyze customer purchase data</strong> and uncover insights such as:
+        </p>
+        <div class="grid grid-cols-1 sm:grid-cols-2 gap-3">
+          <div class="flex items-center gap-3 p-3 rounded-lg" style="background: var(--section-alt-bg)">
+            <svg class="w-5 h-5 text-cyan-500 flex-shrink-0" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+              <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M12 8c-1.657 0-3 .895-3 2s1.343 2 3 2 3 .895 3 2-1.343 2-3 2m0-8c1.11 0 2.08.402 2.599 1M12 8V7m0 1v8m0 0v1m0-1c-1.11 0-2.08-.402-2.599-1M21 12a9 9 0 11-18 0 9 9 0 0118 0z"/>
+            </svg>
+            <span class="text-sm" style="color: var(--text-primary)">Customer spending behavior</span>
+          </div>
+          <div class="flex items-center gap-3 p-3 rounded-lg" style="background: var(--section-alt-bg)">
+            <svg class="w-5 h-5 text-purple-500 flex-shrink-0" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+              <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M16 11V7a4 4 0 00-8 0v4M5 9h14l1 12H4L5 9z"/>
+            </svg>
+            <span class="text-sm" style="color: var(--text-primary)">Purchase patterns</span>
+          </div>
+          <div class="flex items-center gap-3 p-3 rounded-lg" style="background: var(--section-alt-bg)">
+            <svg class="w-5 h-5 text-emerald-500 flex-shrink-0" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+              <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M17 20h5v-2a3 3 0 00-5.356-1.857M17 20H7m10 0v-2c0-.656-.126-1.283-.356-1.857M7 20H2v-2a3 3 0 015.356-1.857M7 20v-2c0-.656.126-1.283.356-1.857m0 0a5.002 5.002 0 019.288 0M15 7a3 3 0 11-6 0 3 3 0 016 0z"/>
+            </svg>
+            <span class="text-sm" style="color: var(--text-primary)">Customer segmentation</span>
+          </div>
+          <div class="flex items-center gap-3 p-3 rounded-lg" style="background: var(--section-alt-bg)">
+            <svg class="w-5 h-5 text-amber-500 flex-shrink-0" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+              <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M7 7h.01M7 3h5c.512 0 1.024.195 1.414.586l7 7a2 2 0 010 2.828l-7 7a2 2 0 01-2.828 0l-7-7A1.994 1.994 0 013 12V7a4 4 0 014-4z"/>
+            </svg>
+            <span class="text-sm" style="color: var(--text-primary)">Popular product categories</span>
+          </div>
+          <div class="flex items-center gap-3 p-3 rounded-lg sm:col-span-2" style="background: var(--section-alt-bg)">
+            <svg class="w-5 h-5 text-rose-500 flex-shrink-0" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+              <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M8 7V3m8 4V3m-9 8h10M5 21h14a2 2 0 002-2V7a2 2 0 00-2-2H5a2 2 0 00-2 2v12a2 2 0 002 2z"/>
+            </svg>
+            <span class="text-sm" style="color: var(--text-primary)">Shopping frequency trends</span>
+          </div>
+        </div>
+        <div class="mt-6 p-4 rounded-xl border border-purple-500/20 bg-purple-500/5">
+          <p class="text-sm font-medium" style="color: var(--text-primary)">
+            <svg class="w-5 h-5 inline mr-2 text-purple-500" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+              <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M15 12a3 3 0 11-6 0 3 3 0 016 0z"/>
+              <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M2.458 12C3.732 7.943 7.523 5 12 5c4.478 0 8.268 2.943 9.542 7-1.274 4.057-5.064 7-9.542 7-4.477 0-8.268-2.943-9.542-7z"/>
+            </svg>
+            The goal is to convert <strong>raw data into meaningful insights</strong> and visual dashboards.
+          </p>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- WHAT YOU WILL DO -->
+  <section class="section section-gradient">
+    <div class="max-w-4xl mx-auto">
+      <div class="section-card p-8 sm:p-10 fade-in">
+        <div class="flex items-start gap-5 mb-6">
+          <div class="section-icon" style="background: linear-gradient(135deg, rgba(16, 185, 129, 0.15), rgba(14, 165, 233, 0.12));">
+            <svg class="w-7 h-7 text-emerald-500" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+              <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 5H7a2 2 0 00-2 2v12a2 2 0 002 2h10a2 2 0 002-2V7a2 2 0 00-2-2h-2M9 5a2 2 0 002 2h2a2 2 0 002-2M9 5a2 2 0 012-2h2a2 2 0 012 2m-3 7h3m-3 4h3m-6-4h.01M9 16h.01"/>
+            </svg>
+          </div>
+          <div>
+            <h2 class="text-2xl sm:text-3xl font-bold mb-2" style="color: var(--text-primary)">What You Will Do</h2>
+            <p class="text-sm font-medium text-emerald-500">Step-by-step tasks</p>
+          </div>
+        </div>
+        <p class="mb-6" style="color: var(--text-secondary)">Interns must complete the following steps:</p>
+        <div class="space-y-3">
+          <div class="flex items-center gap-4 p-4 rounded-xl hover:bg-cyan-500/5 transition-colors" style="background: var(--section-alt-bg)">
+            <div class="w-8 h-8 rounded-lg bg-cyan-500/15 flex items-center justify-center text-cyan-500 font-bold text-sm flex-shrink-0">1</div>
+            <span style="color: var(--text-primary)">Load and explore the dataset</span>
+          </div>
+          <div class="flex items-center gap-4 p-4 rounded-xl hover:bg-cyan-500/5 transition-colors" style="background: var(--section-alt-bg)">
+            <div class="w-8 h-8 rounded-lg bg-cyan-500/15 flex items-center justify-center text-cyan-500 font-bold text-sm flex-shrink-0">2</div>
+            <span style="color: var(--text-primary)">Clean and preprocess the data</span>
+          </div>
+          <div class="flex items-center gap-4 p-4 rounded-xl hover:bg-cyan-500/5 transition-colors" style="background: var(--section-alt-bg)">
+            <div class="w-8 h-8 rounded-lg bg-cyan-500/15 flex items-center justify-center text-cyan-500 font-bold text-sm flex-shrink-0">3</div>
+            <span style="color: var(--text-primary)">Perform exploratory data analysis (EDA)</span>
+          </div>
+          <div class="flex items-center gap-4 p-4 rounded-xl hover:bg-cyan-500/5 transition-colors" style="background: var(--section-alt-bg)">
+            <div class="w-8 h-8 rounded-lg bg-cyan-500/15 flex items-center justify-center text-cyan-500 font-bold text-sm flex-shrink-0">4</div>
+            <span style="color: var(--text-primary)">Identify customer behavior patterns</span>
+          </div>
+          <div class="flex items-center gap-4 p-4 rounded-xl hover:bg-cyan-500/5 transition-colors" style="background: var(--section-alt-bg)">
+            <div class="w-8 h-8 rounded-lg bg-cyan-500/15 flex items-center justify-center text-cyan-500 font-bold text-sm flex-shrink-0">5</div>
+            <span style="color: var(--text-primary)">Perform customer segmentation</span>
+          </div>
+          <div class="flex items-center gap-4 p-4 rounded-xl hover:bg-cyan-500/5 transition-colors" style="background: var(--section-alt-bg)">
+            <div class="w-8 h-8 rounded-lg bg-cyan-500/15 flex items-center justify-center text-cyan-500 font-bold text-sm flex-shrink-0">6</div>
+            <span style="color: var(--text-primary)">Create visualizations and dashboards</span>
+          </div>
+          <div class="flex items-center gap-4 p-4 rounded-xl hover:bg-cyan-500/5 transition-colors" style="background: var(--section-alt-bg)">
+            <div class="w-8 h-8 rounded-lg bg-cyan-500/15 flex items-center justify-center text-cyan-500 font-bold text-sm flex-shrink-0">7</div>
+            <span style="color: var(--text-primary)">Present business insights</span>
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- TOOLS YOU CAN USE -->
+  <section class="section">
+    <div class="max-w-5xl mx-auto">
+      <div class="text-center mb-10 fade-in">
+        <div class="inline-flex items-center gap-2 px-4 py-1.5 rounded-full bg-amber-500/10 border border-amber-500/20 text-amber-500 text-xs font-semibold mb-4">
+          <svg class="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M10.325 4.317c.426-1.756 2.924-1.756 3.35 0a1.724 1.724 0 002.573 1.066c1.543-.94 3.31.826 2.37 2.37a1.724 1.724 0 001.066 2.573c1.756.426 1.756 2.924 0 3.35a1.724 1.724 0 00-1.066 2.573c.94 1.543-.826 3.31-2.37 2.37a1.724 1.724 0 00-2.573 1.066c-.426 1.756-2.924 1.756-3.35 0a1.724 1.724 0 00-2.573-1.066c-1.543.94-3.31-.826-2.37-2.37a1.724 1.724 0 00-1.066-2.573c-1.756-.426-1.756-2.924 0-3.35a1.724 1.724 0 001.066-2.573c-.94-1.543.826-3.31 2.37-2.37.996.608 2.296.07 2.572-1.065z"/>
+            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M15 12a3 3 0 11-6 0 3 3 0 016 0z"/>
+          </svg>
+          Recommended Tools
+        </div>
+        <h2 class="text-2xl sm:text-3xl font-bold mb-3" style="color: var(--text-primary)">Tools You Can Use</h2>
+        <p style="color: var(--text-secondary)">Students may use the following tools</p>
+      </div>
+      <div class="grid grid-cols-1 md:grid-cols-2 gap-6">
+        <div class="section-card p-6 fade-in">
+          <h3 class="font-bold mb-4 flex items-center gap-2" style="color: var(--text-primary)">
+            <svg class="w-5 h-5 text-cyan-500" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+              <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 3v2m6-2v2M9 19v2m6-2v2M5 9H3m2 6H3m18-6h-2m2 6h-2M7 19h10a2 2 0 002-2V7a2 2 0 00-2-2H7a2 2 0 00-2 2v10a2 2 0 002 2z"/>
+            </svg>
+            Core Development Tools
+          </h3>
+          <div class="grid grid-cols-2 gap-3">
+            <div class="tool-badge"><div class="tool-icon bg-blue-500/15 text-blue-500">PY</div><span class="text-sm font-medium" style="color: var(--text-primary)">Python</span></div>
+            <div class="tool-badge"><div class="tool-icon bg-orange-500/15 text-orange-500">JN</div><span class="text-sm font-medium" style="color: var(--text-primary)">Jupyter</span></div>
+            <div class="tool-badge"><div class="tool-icon bg-sky-500/15 text-sky-500">VS</div><span class="text-sm font-medium" style="color: var(--text-primary)">VS Code</span></div>
+            <div class="tool-badge"><div class="tool-icon bg-amber-500/15 text-amber-500">GC</div><span class="text-sm font-medium" style="color: var(--text-primary)">Colab</span></div>
+          </div>
+        </div>
+        <div class="section-card p-6 fade-in">
+          <h3 class="font-bold mb-4 flex items-center gap-2" style="color: var(--text-primary)">
+            <svg class="w-5 h-5 text-purple-500" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+              <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M8 14v3m4-3v3m4-3v3M3 21h18M3 10h18M3 7l9-4 9 4M4 10h16v11H4V10z"/>
+            </svg>
+            Python Data Analysis Libraries
+          </h3>
+          <div class="grid grid-cols-2 gap-3">
+            <div class="tool-badge"><div class="tool-icon bg-indigo-500/15 text-indigo-500">PD</div><span class="text-sm font-medium" style="color: var(--text-primary)">Pandas</span></div>
+            <div class="tool-badge"><div class="tool-icon bg-cyan-500/15 text-cyan-500">NP</div><span class="text-sm font-medium" style="color: var(--text-primary)">NumPy</span></div>
+            <div class="tool-badge"><div class="tool-icon bg-teal-500/15 text-teal-500">MP</div><span class="text-sm font-medium" style="color: var(--text-primary)">Matplotlib</span></div>
+            <div class="tool-badge"><div class="tool-icon bg-rose-500/15 text-rose-500">SB</div><span class="text-sm font-medium" style="color: var(--text-primary)">Seaborn</span></div>
+          </div>
+        </div>
+        <div class="section-card p-6 fade-in">
+          <h3 class="font-bold mb-4 flex items-center gap-2" style="color: var(--text-primary)">
+            <svg class="w-5 h-5 text-emerald-500" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+              <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M11 3.055A9.001 9.001 0 1020.945 13H11V3.055z"/>
+              <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M20.488 9H15V3.512A9.025 9.025 0 0120.488 9z"/>
+            </svg>
+            Visualization Tools
+          </h3>
+          <div class="grid grid-cols-3 gap-3">
+            <div class="tool-badge flex-col text-center py-4"><div class="tool-icon bg-amber-500/15 text-amber-500 mb-2">BI</div><span class="text-xs font-medium" style="color: var(--text-primary)">Power BI</span></div>
+            <div class="tool-badge flex-col text-center py-4"><div class="tool-icon bg-blue-600/15 text-blue-600 mb-2">TB</div><span class="text-xs font-medium" style="color: var(--text-primary)">Tableau</span></div>
+            <div class="tool-badge flex-col text-center py-4"><div class="tool-icon bg-emerald-500/15 text-emerald-500 mb-2">XL</div><span class="text-xs font-medium" style="color: var(--text-primary)">Excel</span></div>
+          </div>
+        </div>
+        <div class="section-card p-6 fade-in">
+          <h3 class="font-bold mb-4 flex items-center gap-2" style="color: var(--text-primary)">
+            <svg class="w-5 h-5 text-gray-500" fill="currentColor" viewBox="0 0 24 24">
+              <path d="M12 0c-6.626 0-12 5.373-12 12 0 5.302 3.438 9.8 8.207 11.387.599.111.793-.261.793-.577v-2.234c-3.338.726-4.033-1.416-4.033-1.416-.546-1.387-1.333-1.756-1.333-1.756-1.089-.745.083-.729.083-.729 1.205.084 1.839 1.237 1.839 1.237 1.07 1.834 2.807 1.304 3.492.997.107-.775.418-1.305.762-1.604-2.665-.305-5.467-1.334-5.467-5.931 0-1.311.469-2.381 1.236-3.221-.124-.303-.535-1.524.117-3.176 0 0 1.008-.322 3.301 1.23.957-.266 1.983-.399 3.003-.404 1.02.005 2.047.138 3.006.404 2.291-1.552 3.297-1.23 3.297-1.23.653 1.653.242 2.874.118 3.176.77.84 1.235 1.911 1.235 3.221 0 4.609-2.807 5.624-5.479 5.921.43.372.823 1.102.823 2.222v3.293c0 .319.192.694.801.576 4.765-1.589 8.199-6.086 8.199-11.386 0-6.627-5.373-12-12-12z"/>
+            </svg>
+            Version Control
+          </h3>
+          <div class="p-4 rounded-xl bg-gradient-to-r from-gray-800/10 to-gray-600/5 border border-gray-500/20">
+            <div class="flex items-center gap-4">
+              <div class="w-12 h-12 rounded-xl bg-gray-800 flex items-center justify-center flex-shrink-0">
+                <svg class="w-7 h-7 text-white" fill="currentColor" viewBox="0 0 24 24">
+                  <path d="M12 0c-6.626 0-12 5.373-12 12 0 5.302 3.438 9.8 8.207 11.387.599.111.793-.261.793-.577v-2.234c-3.338.726-4.033-1.416-4.033-1.416-.546-1.387-1.333-1.756-1.333-1.756-1.089-.745.083-.729.083-.729 1.205.084 1.839 1.237 1.839 1.237 1.07 1.834 2.807 1.304 3.492.997.107-.775.418-1.305.762-1.604-2.665-.305-5.467-1.334-5.467-5.931 0-1.311.469-2.381 1.236-3.221-.124-.303-.535-1.524.117-3.176 0 0 1.008-.322 3.301 1.23.957-.266 1.983-.399 3.003-.404 1.02.005 2.047.138 3.006.404 2.291-1.552 3.297-1.23 3.297-1.23.653 1.653.242 2.874.118 3.176.77.84 1.235 1.911 1.235 3.221 0 4.609-2.807 5.624-5.479 5.921.43.372.823 1.102.823 2.222v3.293c0 .319.192.694.801.576 4.765-1.589 8.199-6.086 8.199-11.386 0-6.627-5.373-12-12-12z"/>
+                </svg>
+              </div>
+              <div>
+                <p class="font-bold" style="color: var(--text-primary)">GitHub</p>
+                <p class="text-sm" style="color: var(--text-secondary)">Required for project submission</p>
+              </div>
+              <span class="ml-auto px-3 py-1 text-xs font-semibold rounded-full bg-red-500/15 text-red-500">Required</span>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- DATASET GUIDANCE -->
+  <section id="datasets" class="section section-gradient">
+    <div class="max-w-5xl mx-auto">
+      <div class="text-center mb-10 fade-in">
+        <div class="inline-flex items-center gap-2 px-4 py-1.5 rounded-full bg-rose-500/10 border border-rose-500/20 text-rose-500 text-xs font-semibold mb-4">
+          <svg class="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M4 7v10c0 2.21 3.582 4 8 4s8-1.79 8-4V7M4 7c0 2.21 3.582 4 8 4s8-1.79 8-4M4 7c0-2.21 3.582-4 8-4s8 1.79 8 4"/>
+          </svg>
+          Choose Your Dataset
+        </div>
+        <h2 class="text-2xl sm:text-3xl font-bold mb-3" style="color: var(--text-primary)">Dataset Guidance</h2>
+        <p style="color: var(--text-secondary)">Interns must select <strong style="color: var(--text-primary)">ONE</strong> dataset from the following options</p>
+      </div>
+      <div class="grid grid-cols-1 md:grid-cols-3 gap-6">
+        <!-- Dataset 1 -->
+        <div class="dataset-card fade-in">
+          <div class="dataset-card-header">
+            <div class="flex items-center gap-3 mb-3">
+              <div class="dataset-number">1</div>
+              <span class="text-xs font-semibold px-2 py-1 rounded-full bg-cyan-500/15 text-cyan-500">Popular</span>
+            </div>
+            <h3 class="text-lg font-bold" style="color: var(--text-primary)">Mall Customer Segmentation</h3>
+          </div>
+          <div class="p-5">
+            <p class="text-sm mb-4 leading-relaxed" style="color: var(--text-secondary)">
+              Customer demographic dataset commonly used for customer segmentation and spending score analysis.
+            </p>
+            <div class="space-y-2 mb-5">
+              <div class="flex items-center gap-2 text-xs" style="color: var(--text-muted)">
+                <svg class="w-4 h-4 text-emerald-500" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 12l2 2 4-4m6 2a9 9 0 11-18 0 9 9 0 0118 0z"/></svg>
+                Customer Demographics
+              </div>
+              <div class="flex items-center gap-2 text-xs" style="color: var(--text-muted)">
+                <svg class="w-4 h-4 text-emerald-500" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 12l2 2 4-4m6 2a9 9 0 11-18 0 9 9 0 0118 0z"/></svg>
+                Spending Scores
+              </div>
+              <div class="flex items-center gap-2 text-xs" style="color: var(--text-muted)">
+                <svg class="w-4 h-4 text-emerald-500" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 12l2 2 4-4m6 2a9 9 0 11-18 0 9 9 0 0118 0z"/></svg>
+                Income Data
+              </div>
+            </div>
+            <a href="https://www.kaggle.com/datasets/vjchoudhary7/customer-segmentation-tutorial-in-python" target="_blank" rel="noopener noreferrer" class="btn-primary w-full text-sm py-2.5">
+              <svg class="w-4 h-4 mr-2" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M10 6H6a2 2 0 00-2 2v10a2 2 0 002 2h10a2 2 0 002-2v-4M14 4h6m0 0v6m0-6L10 14"/></svg>
+              View on Kaggle
+            </a>
+          </div>
+        </div>
+        <!-- Dataset 2 -->
+        <div class="dataset-card fade-in fade-in-delay-1">
+          <div class="dataset-card-header">
+            <div class="flex items-center gap-3 mb-3">
+              <div class="dataset-number">2</div>
+              <span class="text-xs font-semibold px-2 py-1 rounded-full bg-purple-500/15 text-purple-500">Trending</span>
+            </div>
+            <h3 class="text-lg font-bold" style="color: var(--text-primary)">Customer Shopping Trends</h3>
+          </div>
+          <div class="p-5">
+            <p class="text-sm mb-4 leading-relaxed" style="color: var(--text-secondary)">
+              Dataset containing customer shopping trends for analyzing purchase patterns and buying behavior.
+            </p>
+            <div class="space-y-2 mb-5">
+              <div class="flex items-center gap-2 text-xs" style="color: var(--text-muted)">
+                <svg class="w-4 h-4 text-emerald-500" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 12l2 2 4-4m6 2a9 9 0 11-18 0 9 9 0 0118 0z"/></svg>
+                Shopping Trends
+              </div>
+              <div class="flex items-center gap-2 text-xs" style="color: var(--text-muted)">
+                <svg class="w-4 h-4 text-emerald-500" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 12l2 2 4-4m6 2a9 9 0 11-18 0 9 9 0 0118 0z"/></svg>
+                Purchase Patterns
+              </div>
+              <div class="flex items-center gap-2 text-xs" style="color: var(--text-muted)">
+                <svg class="w-4 h-4 text-emerald-500" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 12l2 2 4-4m6 2a9 9 0 11-18 0 9 9 0 0118 0z"/></svg>
+                Buying Behavior
+              </div>
+            </div>
+            <a href="https://www.kaggle.com/datasets/iamsouravbanerjee/customer-shopping-trends-dataset" target="_blank" rel="noopener noreferrer" class="btn-primary w-full text-sm py-2.5">
+              <svg class="w-4 h-4 mr-2" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M10 6H6a2 2 0 00-2 2v10a2 2 0 002 2h10a2 2 0 002-2v-4M14 4h6m0 0v6m0-6L10 14"/></svg>
+              View on Kaggle
+            </a>
+          </div>
+        </div>
+        <!-- Dataset 3 -->
+        <div class="dataset-card fade-in fade-in-delay-2">
+          <div class="dataset-card-header">
+            <div class="flex items-center gap-3 mb-3">
+              <div class="dataset-number">3</div>
+              <span class="text-xs font-semibold px-2 py-1 rounded-full bg-emerald-500/15 text-emerald-500">Advanced</span>
+            </div>
+            <h3 class="text-lg font-bold" style="color: var(--text-primary)">E-commerce Customer Behavior</h3>
+          </div>
+          <div class="p-5">
+            <p class="text-sm mb-4 leading-relaxed" style="color: var(--text-secondary)">
+              Large dataset containing customer browsing behavior and online purchases from an e-commerce store.
+            </p>
+            <div class="space-y-2 mb-5">
+              <div class="flex items-center gap-2 text-xs" style="color: var(--text-muted)">
+                <svg class="w-4 h-4 text-emerald-500" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 12l2 2 4-4m6 2a9 9 0 11-18 0 9 9 0 0118 0z"/></svg>
+                Browsing Behavior
+              </div>
+              <div class="flex items-center gap-2 text-xs" style="color: var(--text-muted)">
+                <svg class="w-4 h-4 text-emerald-500" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 12l2 2 4-4m6 2a9 9 0 11-18 0 9 9 0 0118 0z"/></svg>
+                Online Purchases
+              </div>
+              <div class="flex items-center gap-2 text-xs" style="color: var(--text-muted)">
+                <svg class="w-4 h-4 text-emerald-500" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 12l2 2 4-4m6 2a9 9 0 11-18 0 9 9 0 0118 0z"/></svg>
+                Multi-category Data
+              </div>
+            </div>
+            <a href="https://www.kaggle.com/datasets/mkechinov/ecommerce-behavior-data-from-multi-category-store" target="_blank" rel="noopener noreferrer" class="btn-primary w-full text-sm py-2.5">
+              <svg class="w-4 h-4 mr-2" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M10 6H6a2 2 0 00-2 2v10a2 2 0 002 2h10a2 2 0 002-2v-4M14 4h6m0 0v6m0-6L10 14"/></svg>
+              View on Kaggle
+            </a>
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- KEY FEATURES TO IMPLEMENT -->
+  <section class="section">
+    <div class="max-w-4xl mx-auto">
+      <div class="section-card p-8 sm:p-10 fade-in">
+        <div class="flex items-start gap-5 mb-6">
+          <div class="section-icon" style="background: linear-gradient(135deg, rgba(16, 185, 129, 0.15), rgba(34, 197, 94, 0.12));">
+            <svg class="w-7 h-7 text-emerald-500" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+              <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 12l2 2 4-4m6 2a9 9 0 11-18 0 9 9 0 0118 0z"/>
+            </svg>
+          </div>
+          <div>
+            <h2 class="text-2xl sm:text-3xl font-bold mb-2" style="color: var(--text-primary)">Key Features to Implement</h2>
+            <p class="text-sm font-medium text-emerald-500">Core requirements for your project</p>
+          </div>
+        </div>
+        <p class="mb-6" style="color: var(--text-secondary)">Students should try to implement:</p>
+        <div class="grid grid-cols-1 sm:grid-cols-2 gap-3 mb-8">
+          <div class="feature-check"><div class="check-icon"><svg class="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M5 13l4 4L19 7"/></svg></div><span class="text-sm font-medium" style="color: var(--text-primary)">Data cleaning and preprocessing</span></div>
+          <div class="feature-check"><div class="check-icon"><svg class="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M5 13l4 4L19 7"/></svg></div><span class="text-sm font-medium" style="color: var(--text-primary)">Exploratory Data Analysis (EDA)</span></div>
+          <div class="feature-check"><div class="check-icon"><svg class="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M5 13l4 4L19 7"/></svg></div><span class="text-sm font-medium" style="color: var(--text-primary)">Customer segmentation analysis</span></div>
+          <div class="feature-check"><div class="check-icon"><svg class="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M5 13l4 4L19 7"/></svg></div><span class="text-sm font-medium" style="color: var(--text-primary)">Spending pattern analysis</span></div>
+          <div class="feature-check"><div class="check-icon"><svg class="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M5 13l4 4L19 7"/></svg></div><span class="text-sm font-medium" style="color: var(--text-primary)">Product/category popularity analysis</span></div>
+          <div class="feature-check"><div class="check-icon"><svg class="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M5 13l4 4L19 7"/></svg></div><span class="text-sm font-medium" style="color: var(--text-primary)">Interactive dashboard creation</span></div>
+        </div>
+        <div class="border-t border-dashed pt-6" style="border-color: var(--glass-border)">
+          <p class="text-sm font-semibold mb-4 flex items-center gap-2" style="color: var(--text-primary)">
+            <svg class="w-5 h-5 text-purple-500" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M5 3v4M3 5h4M6 17v4m-2-2h4m5-16l2.286 6.857L21 12l-5.714 2.143L13 21l-2.286-6.857L5 12l5.714-2.143L13 3z"/></svg>
+            Optional advanced features:
+          </p>
+          <div class="grid grid-cols-1 sm:grid-cols-3 gap-3">
+            <div class="optional-feature"><span class="text-purple-500">+</span><span class="text-sm" style="color: var(--text-secondary)">Clustering analysis (K-Means)</span></div>
+            <div class="optional-feature"><span class="text-purple-500">+</span><span class="text-sm" style="color: var(--text-secondary)">Customer lifetime value</span></div>
+            <div class="optional-feature"><span class="text-purple-500">+</span><span class="text-sm" style="color: var(--text-secondary)">Purchase trend analysis</span></div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- FINAL DELIVERABLE -->
+  <section class="section section-gradient">
+    <div class="max-w-4xl mx-auto">
+      <div class="section-card p-8 sm:p-10 fade-in">
+        <div class="flex items-start gap-5 mb-6">
+          <div class="section-icon" style="background: linear-gradient(135deg, rgba(59, 130, 246, 0.15), rgba(14, 165, 233, 0.12));">
+            <svg class="w-7 h-7 text-blue-500" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+              <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 12h6m-6 4h6m2 5H7a2 2 0 01-2-2V5a2 2 0 012-2h5.586a1 1 0 01.707.293l5.414 5.414a1 1 0 01.293.707V19a2 2 0 01-2 2z"/>
+            </svg>
+          </div>
+          <div>
+            <h2 class="text-2xl sm:text-3xl font-bold mb-2" style="color: var(--text-primary)">Final Deliverable</h2>
+            <p class="text-sm font-medium text-blue-500">What you need to submit</p>
+          </div>
+        </div>
+        <p class="mb-6" style="color: var(--text-secondary)">Students must submit:</p>
+        <div class="space-y-3 mb-8">
+          <div class="flex items-center gap-3 p-4 rounded-xl" style="background: var(--section-alt-bg)">
+            <svg class="w-5 h-5 text-cyan-500 flex-shrink-0" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M5 8h14M5 8a2 2 0 110-4h14a2 2 0 110 4M5 8v10a2 2 0 002 2h10a2 2 0 002-2V8m-9 4h4"/></svg>
+            <span style="color: var(--text-primary)">A well-structured <strong>GitHub repository</strong></span>
+          </div>
+          <div class="flex items-center gap-3 p-4 rounded-xl" style="background: var(--section-alt-bg)">
+            <svg class="w-5 h-5 text-purple-500 flex-shrink-0" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M10 20l4-16m4 4l4 4-4 4M6 16l-4-4 4-4"/></svg>
+            <span style="color: var(--text-primary)"><strong>Dataset and analysis code</strong></span>
+          </div>
+          <div class="flex items-center gap-3 p-4 rounded-xl" style="background: var(--section-alt-bg)">
+            <svg class="w-5 h-5 text-emerald-500 flex-shrink-0" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M11 3.055A9.001 9.001 0 1020.945 13H11V3.055z"/></svg>
+            <span style="color: var(--text-primary)"><strong>Visualizations and dashboards</strong></span>
+          </div>
+          <div class="flex items-center gap-3 p-4 rounded-xl" style="background: var(--section-alt-bg)">
+            <svg class="w-5 h-5 text-amber-500 flex-shrink-0" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 12h6m-6 4h6m2 5H7a2 2 0 01-2-2V5a2 2 0 012-2h5.586a1 1 0 01.707.293l5.414 5.414a1 1 0 01.293.707V19a2 2 0 01-2 2z"/></svg>
+            <span style="color: var(--text-primary)"><strong>README</strong> explaining insights</span>
+          </div>
+        </div>
+        <h3 class="font-bold mb-4 flex items-center gap-2" style="color: var(--text-primary)">
+          <svg class="w-5 h-5 text-gray-500" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M3 7v10a2 2 0 002 2h14a2 2 0 002-2V9a2 2 0 00-2-2h-6l-2-2H5a2 2 0 00-2 2z"/></svg>
+          Recommended GitHub Structure:
+        </h3>
+        <div class="code-block mb-8">
+          <div class="code-header">
+            <div class="code-dot bg-red-500"></div>
+            <div class="code-dot bg-yellow-500"></div>
+            <div class="code-dot bg-green-500"></div>
+            <span class="text-xs text-gray-400 ml-2">repository/</span>
+          </div>
+          <div class="code-content">
+            <div><span class="code-folder">repository/</span></div>
+            <div class="ml-4"><span class="code-file">dataset.csv</span></div>
+            <div class="ml-4"><span class="code-file">analysis.ipynb</span></div>
+            <div class="ml-4"><span class="code-folder">visualizations/</span></div>
+            <div class="ml-4"><span class="code-file">dashboard.pbix</span> <span class="code-comment">or tableau file</span></div>
+            <div class="ml-4"><span class="code-file">README.md</span></div>
+          </div>
+        </div>
+        <h3 class="font-bold mb-4 flex items-center gap-2" style="color: var(--text-primary)">
+          <svg class="w-5 h-5 text-amber-500" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 12h6m-6 4h6m2 5H7a2 2 0 01-2-2V5a2 2 0 012-2h5.586a1 1 0 01.707.293l5.414 5.414a1 1 0 01.293.707V19a2 2 0 01-2 2z"/></svg>
+          README should include:
+        </h3>
+        <div class="grid grid-cols-2 sm:grid-cols-3 md:grid-cols-5 gap-3">
+          <div class="text-center p-3 rounded-lg" style="background: var(--section-alt-bg)"><svg class="w-6 h-6 mx-auto mb-2 text-cyan-500" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 12l2 2 4-4m5.618-4.016A11.955 11.955 0 0112 2.944a11.955 11.955 0 01-8.618 3.04A12.02 12.02 0 003 9c0 5.591 3.824 10.29 9 11.622 5.176-1.332 9-6.03 9-11.622 0-1.042-.133-2.052-.382-3.016z"/></svg><span class="text-xs font-medium" style="color: var(--text-secondary)">Project objective</span></div>
+          <div class="text-center p-3 rounded-lg" style="background: var(--section-alt-bg)"><svg class="w-6 h-6 mx-auto mb-2 text-purple-500" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M4 7v10c0 2.21 3.582 4 8 4s8-1.79 8-4V7M4 7c0 2.21 3.582 4 8 4s8-1.79 8-4M4 7c0-2.21 3.582-4 8-4s8 1.79 8 4"/></svg><span class="text-xs font-medium" style="color: var(--text-secondary)">Dataset source</span></div>
+          <div class="text-center p-3 rounded-lg" style="background: var(--section-alt-bg)"><svg class="w-6 h-6 mx-auto mb-2 text-emerald-500" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M10.325 4.317c.426-1.756 2.924-1.756 3.35 0a1.724 1.724 0 002.573 1.066c1.543-.94 3.31.826 2.37 2.37a1.724 1.724 0 001.066 2.573c1.756.426 1.756 2.924 0 3.35a1.724 1.724 0 00-1.066 2.573c.94 1.543-.826 3.31-2.37 2.37a1.724 1.724 0 00-2.573 1.066c-.426 1.756-2.924 1.756-3.35 0a1.724 1.724 0 00-2.573-1.066c-1.543.94-3.31-.826-2.37-2.37a1.724 1.724 0 00-1.066-2.573c-1.756-.426-1.756-2.924 0-3.35a1.724 1.724 0 001.066-2.573c-.94-1.543.826-3.31 2.37-2.37.996.608 2.296.07 2.572-1.065z"/></svg><span class="text-xs font-medium" style="color: var(--text-secondary)">Tools used</span></div>
+          <div class="text-center p-3 rounded-lg" style="background: var(--section-alt-bg)"><svg class="w-6 h-6 mx-auto mb-2 text-amber-500" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9.663 17h4.673M12 3v1m6.364 1.636l-.707.707M21 12h-1M4 12H3m3.343-5.657l-.707-.707m2.828 9.9a5 5 0 117.072 0l-.548.547A3.374 3.374 0 0014 18.469V19a2 2 0 11-4 0v-.531c0-.895-.356-1.754-.988-2.386l-.548-.547z"/></svg><span class="text-xs font-medium" style="color: var(--text-secondary)">Key insights</span></div>
+          <div class="text-center p-3 rounded-lg" style="background: var(--section-alt-bg)"><svg class="w-6 h-6 mx-auto mb-2 text-rose-500" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M4 16l4.586-4.586a2 2 0 012.828 0L16 16m-2-2l1.586-1.586a2 2 0 012.828 0L20 14m-6-6h.01M6 20h12a2 2 0 002-2V6a2 2 0 00-2-2H6a2 2 0 00-2 2v12a2 2 0 002 2z"/></svg><span class="text-xs font-medium" style="color: var(--text-secondary)">Screenshots</span></div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- WHY THIS TASK MATTERS -->
+  <section class="section">
+    <div class="max-w-4xl mx-auto">
+      <div class="section-card p-8 sm:p-10 fade-in">
+        <div class="flex items-start gap-5 mb-6">
+          <div class="section-icon" style="background: linear-gradient(135deg, rgba(236, 72, 153, 0.15), rgba(139, 92, 246, 0.12));">
+            <svg class="w-7 h-7 text-pink-500" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+              <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M11.049 2.927c.3-.921 1.603-.921 1.902 0l1.519 4.674a1 1 0 00.95.69h4.915c.969 0 1.371 1.24.588 1.81l-3.976 2.888a1 1 0 00-.363 1.118l1.518 4.674c.3.922-.755 1.688-1.538 1.118l-3.976-2.888a1 1 0 00-1.176 0l-3.976 2.888c-.783.57-1.838-.197-1.538-1.118l1.518-4.674a1 1 0 00-.363-1.118l-3.976-2.888c-.784-.57-.38-1.81.588-1.81h4.914a1 1 0 00.951-.69l1.519-4.674z"/>
+            </svg>
+          </div>
+          <div>
+            <h2 class="text-2xl sm:text-3xl font-bold mb-2" style="color: var(--text-primary)">Why This Task Matters</h2>
+            <p class="text-sm font-medium text-pink-500">Real-world skills you'll develop</p>
+          </div>
+        </div>
+        <p class="mb-6" style="color: var(--text-secondary)">
+          <strong style="color: var(--text-primary)">Customer behavior analysis</strong> is a critical skill used by:
+        </p>
+        <div class="grid grid-cols-2 sm:grid-cols-4 gap-3 mb-6">
+          <div class="text-center p-4 rounded-xl" style="background: var(--section-alt-bg)"><svg class="w-8 h-8 mx-auto mb-2 text-cyan-500" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M3 3h2l.4 2M7 13h10l4-8H5.4M7 13L5.4 5M7 13l-2.293 2.293c-.63.63-.184 1.707.707 1.707H17m0 0a2 2 0 100 4 2 2 0 000-4zm-8 2a2 2 0 11-4 0 2 2 0 014 0z"/></svg><span class="text-xs font-medium" style="color: var(--text-secondary)">E-commerce</span></div>
+          <div class="text-center p-4 rounded-xl" style="background: var(--section-alt-bg)"><svg class="w-8 h-8 mx-auto mb-2 text-purple-500" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M11 5.882V19.24a1.76 1.76 0 01-3.417.592l-2.147-6.15M18 13a3 3 0 100-6M5.436 13.683A4.001 4.001 0 017 6h1.832c4.1 0 7.625-1.234 9.168-3v14c-1.543-1.766-5.067-3-9.168-3H7a3.988 3.988 0 01-1.564-.317z"/></svg><span class="text-xs font-medium" style="color: var(--text-secondary)">Marketing</span></div>
+          <div class="text-center p-4 rounded-xl" style="background: var(--section-alt-bg)"><svg class="w-8 h-8 mx-auto mb-2 text-emerald-500" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M20 7l-8-4-8 4m16 0l-8 4m8-4v10l-8 4m0-10L4 7m8 4v10M4 7v10l8 4"/></svg><span class="text-xs font-medium" style="color: var(--text-secondary)">Product</span></div>
+          <div class="text-center p-4 rounded-xl" style="background: var(--section-alt-bg)"><svg class="w-8 h-8 mx-auto mb-2 text-amber-500" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M19 21V5a2 2 0 00-2-2H7a2 2 0 00-2 2v16m14 0h2m-2 0h-5m-9 0H3m2 0h5M9 7h1m-1 4h1m4-4h1m-1 4h1m-5 10v-5a1 1 0 011-1h2a1 1 0 011 1v5m-4 0h4"/></svg><span class="text-xs font-medium" style="color: var(--text-secondary)">Retail</span></div>
+        </div>
+        <p class="mb-6" style="color: var(--text-secondary)">By completing this project, you will learn how to:</p>
+        <div class="grid grid-cols-1 sm:grid-cols-2 gap-4">
+          <div class="why-card"><div class="flex items-center gap-3"><svg class="w-6 h-6 text-cyan-500 flex-shrink-0" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M16 7a4 4 0 11-8 0 4 4 0 018 0zM12 14a7 7 0 00-7 7h14a7 7 0 00-7-7z"/></svg><span class="font-medium" style="color: var(--text-primary)">Analyze customer data</span></div></div>
+          <div class="why-card"><div class="flex items-center gap-3"><svg class="w-6 h-6 text-purple-500 flex-shrink-0" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 19v-6a2 2 0 00-2-2H5a2 2 0 00-2 2v6a2 2 0 002 2h2a2 2 0 002-2zm0 0V9a2 2 0 012-2h2a2 2 0 012 2v10m-6 0a2 2 0 002 2h2a2 2 0 002-2m0 0V5a2 2 0 012-2h2a2 2 0 012 2v14a2 2 0 01-2 2h-2a2 2 0 01-2-2z"/></svg><span class="font-medium" style="color: var(--text-primary)">Identify purchasing patterns</span></div></div>
+          <div class="why-card"><div class="flex items-center gap-3"><svg class="w-6 h-6 text-emerald-500 flex-shrink-0" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M11 3.055A9.001 9.001 0 1020.945 13H11V3.055z"/></svg><span class="font-medium" style="color: var(--text-primary)">Build dashboards for insights</span></div></div>
+          <div class="why-card"><div class="flex items-center gap-3"><svg class="w-6 h-6 text-amber-500 flex-shrink-0" fill="currentColor" viewBox="0 0 24 24"><path d="M12 0c-6.626 0-12 5.373-12 12 0 5.302 3.438 9.8 8.207 11.387.599.111.793-.261.793-.577v-2.234c-3.338.726-4.033-1.416-4.033-1.416-.546-1.387-1.333-1.756-1.333-1.756-1.089-.745.083-.729.083-.729 1.205.084 1.839 1.237 1.839 1.237 1.07 1.834 2.807 1.304 3.492.997.107-.775.418-1.305.762-1.604-2.665-.305-5.467-1.334-5.467-5.931 0-1.311.469-2.381 1.236-3.221-.124-.303-.535-1.524.117-3.176 0 0 1.008-.322 3.301 1.23.957-.266 1.983-.399 3.003-.404 1.02.005 2.047.138 3.006.404 2.291-1.552 3.297-1.23 3.297-1.23.653 1.653.242 2.874.118 3.176.77.84 1.235 1.911 1.235 3.221 0 4.609-2.807 5.624-5.479 5.921.43.372.823 1.102.823 2.222v3.293c0 .319.192.694.801.576 4.765-1.589 8.199-6.086 8.199-11.386 0-6.627-5.373-12-12-12z"/></svg><span class="font-medium" style="color: var(--text-primary)">Build analytics portfolio</span></div></div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- SHOWCASE YOUR WORK -->
+  <section class="section section-gradient">
+    <div class="max-w-4xl mx-auto">
+      <div class="section-card p-8 sm:p-10 fade-in">
+        <div class="flex items-start gap-5 mb-6">
+          <div class="section-icon" style="background: linear-gradient(135deg, rgba(0, 119, 181, 0.15), rgba(14, 165, 233, 0.12));">
+            <svg class="w-7 h-7 text-sky-500" fill="currentColor" viewBox="0 0 24 24">
+              <path d="M20.447 20.452h-3.554v-5.569c0-1.328-.027-3.037-1.852-3.037-1.853 0-2.136 1.445-2.136 2.939v5.667H9.351V9h3.414v1.561h.046c.477-.9 1.637-1.85 3.37-1.85 3.601 0 4.267 2.37 4.267 5.455v6.286zM5.337 7.433a2.062 2.062 0 01-2.063-2.065 2.064 2.064 0 112.063 2.065zm1.782 13.019H3.555V9h3.564v11.452zM22.225 0H1.771C.792 0 0 .774 0 1.729v20.542C0 23.227.792 24 1.771 24h20.451C23.2 24 24 23.227 24 22.271V1.729C24 .774 23.2 0 22.222 0h.003z"/>
+            </svg>
+          </div>
+          <div>
+            <h2 class="text-2xl sm:text-3xl font-bold mb-2" style="color: var(--text-primary)">Showcase Your Work</h2>
+            <p class="text-sm font-medium text-sky-500">Share your achievement</p>
+          </div>
+        </div>
+        <p class="mb-6" style="color: var(--text-secondary)">Once completed:</p>
+        <div class="space-y-3 mb-8">
+          <div class="flex items-center gap-3 p-4 rounded-xl" style="background: var(--section-alt-bg)"><svg class="w-5 h-5 text-gray-500 flex-shrink-0" fill="currentColor" viewBox="0 0 24 24"><path d="M12 0c-6.626 0-12 5.373-12 12 0 5.302 3.438 9.8 8.207 11.387.599.111.793-.261.793-.577v-2.234c-3.338.726-4.033-1.416-4.033-1.416-.546-1.387-1.333-1.756-1.333-1.756-1.089-.745.083-.729.083-.729 1.205.084 1.839 1.237 1.839 1.237 1.07 1.834 2.807 1.304 3.492.997.107-.775.418-1.305.762-1.604-2.665-.305-5.467-1.334-5.467-5.931 0-1.311.469-2.381 1.236-3.221-.124-.303-.535-1.524.117-3.176 0 0 1.008-.322 3.301 1.23.957-.266 1.983-.399 3.003-.404 1.02.005 2.047.138 3.006.404 2.291-1.552 3.297-1.23 3.297-1.23.653 1.653.242 2.874.118 3.176.77.84 1.235 1.911 1.235 3.221 0 4.609-2.807 5.624-5.479 5.921.43.372.823 1.102.823 2.222v3.293c0 .319.192.694.801.576 4.765-1.589 8.199-6.086 8.199-11.386 0-6.627-5.373-12-12-12z"/></svg><span style="color: var(--text-primary)">Upload your project to <strong>GitHub</strong></span></div>
+          <div class="flex items-center gap-3 p-4 rounded-xl" style="background: var(--section-alt-bg)"><svg class="w-5 h-5 text-sky-600 flex-shrink-0" fill="currentColor" viewBox="0 0 24 24"><path d="M20.447 20.452h-3.554v-5.569c0-1.328-.027-3.037-1.852-3.037-1.853 0-2.136 1.445-2.136 2.939v5.667H9.351V9h3.414v1.561h.046c.477-.9 1.637-1.85 3.37-1.85 3.601 0 4.267 2.37 4.267 5.455v6.286zM5.337 7.433a2.062 2.062 0 01-2.063-2.065 2.064 2.064 0 112.063 2.065zm1.782 13.019H3.555V9h3.564v11.452zM22.225 0H1.771C.792 0 0 .774 0 1.729v20.542C0 23.227.792 24 1.771 24h20.451C23.2 24 24 23.227 24 22.271V1.729C24 .774 23.2 0 22.222 0h.003z"/></svg><span style="color: var(--text-primary)">Share your analysis on <strong>LinkedIn</strong></span></div>
+          <div class="flex items-center gap-3 p-4 rounded-xl" style="background: var(--section-alt-bg)"><svg class="w-5 h-5 text-cyan-500 flex-shrink-0" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M7 20l4-16m2 16l4-16M6 9h14M4 15h14"/></svg><span style="color: var(--text-primary)">Tag <strong class="text-cyan-500">VectorForgeML</strong></span></div>
+        </div>
+        <h3 class="font-bold mb-4" style="color: var(--text-primary)">Example LinkedIn caption:</h3>
+        <div class="linkedin-card">
+          <div class="flex items-center gap-3 mb-4">
+            <div class="w-10 h-10 rounded-full bg-sky-600 flex items-center justify-center text-white font-bold text-sm">YN</div>
+            <div><p class="font-semibold text-sm" style="color: var(--text-primary)">Your Name</p><p class="text-xs" style="color: var(--text-muted)">Data Analysis Intern at VectorForgeML</p></div>
+          </div>
+          <p class="text-sm leading-relaxed" style="color: var(--text-secondary)">
+            <em>"Completed my <strong>Customer Purchase Behavior Analysis</strong> project as part of the Data Analysis Internship at <span class="text-sky-600 font-semibold">VectorForgeML</span>."</em>
+          </p>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- CTA SECTION -->
+  <section class="counter-section py-20 px-4">
+    <div class="relative z-10 max-w-3xl mx-auto text-center">
+      <h2 class="text-3xl sm:text-4xl font-bold text-white mb-5 fade-in">Ready to Start Task 2?</h2>
+      <p class="text-lg text-white/80 mb-8 fade-in">Choose your dataset, analyze customer behavior, and build insights!</p>
+      <div class="flex flex-col sm:flex-row items-center justify-center gap-4 fade-in">
+        <a href="#datasets" class="inline-flex items-center justify-center px-10 py-4 bg-white text-blue-800 font-bold rounded-xl text-lg transition-all hover:shadow-lg hover:translate-y-[-2px]" style="text-decoration:none;">
+          Choose Dataset
+          <svg class="w-5 h-5 ml-2" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M17 8l4 4m0 0l-4 4m4-4H3"/></svg>
+        </a>
+        <a href="#about-task" class="inline-flex items-center justify-center px-10 py-4 border-2 border-white/30 text-white font-bold rounded-xl text-lg transition-all hover:bg-white/10" style="text-decoration:none;">
+          Review Instructions
+        </a>
+      </div>
+    </div>
+  </section>
+
+  <!-- FOOTER -->
+  <footer class="py-8 px-4" style="background: var(--bg-secondary); border-top: 1px solid var(--glass-border);">
+    <div class="max-w-6xl mx-auto">
+      <div class="flex flex-col sm:flex-row items-center justify-between gap-4">
+        <div class="flex items-center gap-3">
+          <img src="../../assets/images/VectorForgeML_Logo.png" alt="VectorForgeML Logo" class="w-8 h-8" />
+          <span class="font-bold" style="color: var(--text-primary)">VectorForgeML</span>
+        </div>
+        <p class="text-sm text-center" style="color: var(--text-muted)">Data Analysis Internship - Task 2 | Customer Purchase Behavior Analysis</p>
+        <div class="flex items-center gap-4">
+          <a href="https://www.linkedin.com/company/vectorforgeml" target="_blank" rel="noopener noreferrer" class="text-gray-400 hover:text-sky-500 transition-colors"><svg class="w-5 h-5" fill="currentColor" viewBox="0 0 24 24"><path d="M20.447 20.452h-3.554v-5.569c0-1.328-.027-3.037-1.852-3.037-1.853 0-2.136 1.445-2.136 2.939v5.667H9.351V9h3.414v1.561h.046c.477-.9 1.637-1.85 3.37-1.85 3.601 0 4.267 2.37 4.267 5.455v6.286zM5.337 7.433a2.062 2.062 0 01-2.063-2.065 2.064 2.064 0 112.063 2.065zm1.782 13.019H3.555V9h3.564v11.452zM22.225 0H1.771C.792 0 0 .774 0 1.729v20.542C0 23.227.792 24 1.771 24h20.451C23.2 24 24 23.227 24 22.271V1.729C24 .774 23.2 0 22.222 0h.003z"/></svg></a>
+          <a href="https://github.com/VectorForgeML" target="_blank" rel="noopener noreferrer" class="text-gray-400 hover:text-white transition-colors"><svg class="w-5 h-5" fill="currentColor" viewBox="0 0 24 24"><path d="M12 0c-6.626 0-12 5.373-12 12 0 5.302 3.438 9.8 8.207 11.387.599.111.793-.261.793-.577v-2.234c-3.338.726-4.033-1.416-4.033-1.416-.546-1.387-1.333-1.756-1.333-1.756-1.089-.745.083-.729.083-.729 1.205.084 1.839 1.237 1.839 1.237 1.07 1.834 2.807 1.304 3.492.997.107-.775.418-1.305.762-1.604-2.665-.305-5.467-1.334-5.467-5.931 0-1.311.469-2.381 1.236-3.221-.124-.303-.535-1.524.117-3.176 0 0 1.008-.322 3.301 1.23.957-.266 1.983-.399 3.003-.404 1.02.005 2.047.138 3.006.404 2.291-1.552 3.297-1.23 3.297-1.23.653 1.653.242 2.874.118 3.176.77.84 1.235 1.911 1.235 3.221 0 4.609-2.807 5.624-5.479 5.921.43.372.823 1.102.823 2.222v3.293c0 .319.192.694.801.576 4.765-1.589 8.199-6.086 8.199-11.386 0-6.627-5.373-12-12-12z"/></svg></a>
+        </div>
+      </div>
+    </div>
+  </footer>
+
+  <script>
+    const fadeElements = document.querySelectorAll('.fade-in');
+    const fadeObserver = new IntersectionObserver((entries) => {
+      entries.forEach(entry => { if (entry.isIntersecting) entry.target.classList.add('visible'); });
+    }, { threshold: 0.1, rootMargin: '0px 0px -50px 0px' });
+    fadeElements.forEach(el => fadeObserver.observe(el));
+
+    const scrollProgress = document.getElementById('scrollProgress');
+    window.addEventListener('scroll', () => {
+      const scrollTop = window.scrollY;
+      const docHeight = document.documentElement.scrollHeight - window.innerHeight;
+      scrollProgress.style.width = (scrollTop / docHeight) * 100 + '%';
+    });
+
+    document.querySelectorAll('a[href^="#"]').forEach(anchor => {
+      anchor.addEventListener('click', function(e) {
+        e.preventDefault();
+        const target = document.querySelector(this.getAttribute('href'));
+        if (target) target.scrollIntoView({ behavior: 'smooth', block: 'start' });
+      });
+    });
+
+    const root = document.documentElement;
+    const prefersDark = window.matchMedia('(prefers-color-scheme: dark)');
+    function updateTheme() {
+      const savedTheme = localStorage.getItem('theme');
+      if (savedTheme === 'dark' || (!savedTheme && prefersDark.matches)) {
+        root.classList.remove('light'); root.classList.add('dark');
+      } else {
+        root.classList.remove('dark'); root.classList.add('light');
+      }
+    }
+    updateTheme();
+    prefersDark.addEventListener('change', updateTheme);
+    window.addEventListener('storage', updateTheme);
+  </script>
+</body>
+</html>
