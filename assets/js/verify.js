@@ -1,7 +1,7 @@
 (function () {
   'use strict';
 
-  const API_BASE_URL = 'https://script.google.com/macros/s/AKfycbwZQlHmKgHbXYhgOm4z4L9daAKD2_tsEWmNCkzu1cjTMI_2h0hcZJcLR97MvP9NVby4gQ/exec';
+  const API_BASE_URL = 'https://script.google.com/macros/s/AKfycbx5MbCqzeYYmWxJtt7W2-vSynt_6GFHsTkqb86m3U5WRmh265H59HQu0viraMIwoMeaag/exec';
   const RESULT_CONTAINER_ID = 'verify-result';
 
   function getCertificateIdFromURL() {
@@ -63,7 +63,7 @@
         <p class="mb-4 text-sm" style="color:var(--text-secondary)">This intern is registered but has not yet completed the internship. Certificate will be available after completion.</p>
         <div class="space-y-3 text-left">
           <div class="flex justify-between py-2" style="border-bottom:1px solid var(--glass-border)">
-            <span style="color:var(--text-secondary)">Certificate ID</span>
+            <span style="color:var(--text-secondary)">Internship ID</span>
             <span class="text-cyan-400 font-mono text-sm">${escapeHTML(data.id)}</span>
           </div>
           <div class="flex justify-between py-2" style="border-bottom:1px solid var(--glass-border)">
@@ -81,10 +81,15 @@
 
   function renderResult(container, data) {
     if (data && data.found === true && data.fullName && data.completed === true) {
-      const duration = formatDuration(data.startDate, data.endDate);
       const certBtn = downloadButton(data.certificatePDF, 'Download Certificate');
       const lorBtn = downloadButton(data.lorPDF, 'Download LOR');
       const hasButtons = certBtn || lorBtn;
+
+      const certIdRow = data.certificateId ? `
+            <div class="flex justify-between py-2">
+              <span style="color:var(--text-secondary)">Certificate ID</span>
+              <span class="text-cyan-400 font-mono text-sm">${escapeHTML(data.certificateId)}</span>
+            </div>` : '';
 
       container.innerHTML = `
         <div class="glass-card p-6 md:p-8 max-w-lg mx-auto text-center">
@@ -92,34 +97,38 @@
             <svg class="w-5 h-5" fill="currentColor" viewBox="0 0 20 20">
               <path fill-rule="evenodd" d="M10 18a8 8 0 100-16 8 8 0 000 16zm3.707-9.293a1 1 0 00-1.414-1.414L9 10.586 7.707 9.293a1 1 0 00-1.414 1.414l2 2a1 1 0 001.414 0l4-4z" clip-rule="evenodd"/>
             </svg>
-            Verified Certificate
+            Verified Internship Record
           </div>
           <h3 class="text-xl font-bold mb-4" style="color:var(--text-primary)">${escapeHTML(data.fullName)}</h3>
           <div class="space-y-3 text-left">
             <div class="flex justify-between py-2" style="border-bottom:1px solid var(--glass-border)">
-              <span style="color:var(--text-secondary)">Certificate ID</span>
-              <span class="text-cyan-400 font-mono text-sm">${escapeHTML(data.id)}</span>
+              <span style="color:var(--text-secondary)">Full Name</span>
+              <span style="color:var(--text-primary)">${escapeHTML(data.fullName)}</span>
             </div>
             <div class="flex justify-between py-2" style="border-bottom:1px solid var(--glass-border)">
               <span style="color:var(--text-secondary)">Track</span>
               <span style="color:var(--text-primary)">${escapeHTML(data.track)}</span>
             </div>
             <div class="flex justify-between py-2" style="border-bottom:1px solid var(--glass-border)">
-              <span style="color:var(--text-secondary)">Duration</span>
-              <span style="color:var(--text-primary)">${duration}</span>
+              <span style="color:var(--text-secondary)">Start Date</span>
+              <span style="color:var(--text-primary)">${escapeHTML(data.startDate)}</span>
+            </div>
+            <div class="flex justify-between py-2" style="border-bottom:1px solid var(--glass-border)">
+              <span style="color:var(--text-secondary)">End Date</span>
+              <span style="color:var(--text-primary)">${escapeHTML(data.endDate)}</span>
             </div>
             <div class="flex justify-between py-2" style="border-bottom:1px solid var(--glass-border)">
               <span style="color:var(--text-secondary)">Tasks Completed</span>
               <span style="color:var(--text-primary)">${escapeHTML(data.tasksCompleted)}</span>
             </div>
             <div class="flex justify-between py-2" style="border-bottom:1px solid var(--glass-border)">
-              <span style="color:var(--text-secondary)">Certificate Status</span>
+              <span style="color:var(--text-secondary)">Certificate Issued</span>
               ${statusBadge(data.certificateIssued)}
             </div>
-            <div class="flex justify-between py-2">
-              <span style="color:var(--text-secondary)">LOR Status</span>
+            <div class="flex justify-between py-2" style="${certIdRow ? 'border-bottom:1px solid var(--glass-border)' : ''}">
+              <span style="color:var(--text-secondary)">LOR Issued</span>
               ${statusBadge(data.lorIssued)}
-            </div>
+            </div>${certIdRow}
           </div>
           ${hasButtons ? `<div class="flex flex-wrap justify-center gap-3 mt-6">${certBtn}${lorBtn}</div>` : ''}
         </div>
@@ -133,9 +142,9 @@
             <svg class="w-5 h-5" fill="currentColor" viewBox="0 0 20 20">
               <path fill-rule="evenodd" d="M10 18a8 8 0 100-16 8 8 0 000 16zM8.707 7.293a1 1 0 00-1.414 1.414L8.586 10l-1.293 1.293a1 1 0 101.414 1.414L10 11.414l1.293 1.293a1 1 0 001.414-1.414L11.414 10l1.293-1.293a1 1 0 00-1.414-1.414L10 8.586 8.707 7.293z" clip-rule="evenodd"/>
             </svg>
-            Invalid Certificate
+            Invalid Internship ID
           </div>
-          <p style="color:var(--text-secondary)" class="mb-2">The certificate ID provided could not be verified.</p>
+          <p style="color:var(--text-secondary)" class="mb-2">The Internship ID provided could not be verified.</p>
           <p class="text-sm" style="color:var(--text-muted)">Please check the ID and try again, or contact
             <a href="mailto:vectorforgeml@yahoo.com" class="text-cyan-400 hover:underline">vectorforgeml@yahoo.com</a>
           </p>
