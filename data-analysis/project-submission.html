@@ -1,0 +1,951 @@
+<!DOCTYPE html>
+<html lang="en" class="light">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Project Submission | Data Analysis Internship — VectorForgeML</title>
+  <meta name="description" content="Submit your completed VectorForgeML Data Analysis Internship projects for verification and certification. Get your internship certificate and letter of recommendation." />
+  <meta name="keywords" content="VectorForgeML, vectorforgeml internship, data analysis internship, project submission, internship certificate, VectorForge ML, data science internship India, free internship certificate" />
+  <meta name="author" content="VectorForgeML" />
+  <meta name="robots" content="index, follow" />
+  <link rel="canonical" href="https://vectorforgeml.work.gd/data-analysis/project-submission.html" />
+
+  <!-- Open Graph -->
+  <meta property="og:title" content="Project Submission | Data Analysis Internship — VectorForgeML" />
+  <meta property="og:description" content="Submit your completed VectorForgeML Data Analysis Internship projects for verification and certification. Get your internship certificate." />
+  <meta property="og:type" content="website" />
+  <meta property="og:url" content="https://vectorforgeml.work.gd/data-analysis/project-submission.html" />
+  <meta property="og:image" content="https://vectorforgeml.work.gd/assets/images/VectorForgeML_Logo.png" />
+  <meta property="og:site_name" content="VectorForgeML" />
+
+  <!-- Twitter Card -->
+  <meta name="twitter:card" content="summary_large_image" />
+  <meta name="twitter:title" content="Project Submission | Data Analysis Internship — VectorForgeML" />
+  <meta name="twitter:description" content="Submit your completed VectorForgeML Data Analysis Internship projects for verification and certification." />
+  <meta name="twitter:image" content="https://vectorforgeml.work.gd/assets/images/VectorForgeML_Logo.png" />
+
+  <!-- Schema.org JSON-LD -->
+  <script type="application/ld+json">
+  {
+    "@context": "https://schema.org",
+    "@type": "WebPage",
+    "name": "VectorForgeML Data Analysis Internship Project Submission",
+    "description": "Submit your completed Data Analysis Internship projects for verification and certification at VectorForgeML.",
+    "url": "https://vectorforgeml.work.gd/data-analysis/project-submission.html",
+    "publisher": {
+      "@type": "Organization",
+      "name": "VectorForgeML",
+      "logo": "https://vectorforgeml.work.gd/assets/images/VectorForgeML_Logo.png"
+    }
+  }
+  </script>
+
+  <!-- TailwindCSS CDN -->
+  <script src="https://cdn.tailwindcss.com"></script>
+  <script>tailwind.config = { darkMode: 'class' };</script>
+
+  <!-- Poppins + Inter Fonts -->
+  <link rel="preconnect" href="https://fonts.googleapis.com" />
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+  <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;500;600;700;800&family=Inter:wght@300;400;500;600;700;800&display=swap" rel="stylesheet" />
+
+  <!-- Favicon -->
+  <link rel="icon" type="image/png" href="../assets/images/VectorForgeML_Logo.png" />
+
+  <!-- Custom Styles -->
+  <link rel="stylesheet" href="../assets/css/styles.css" />
+
+  <style>
+    /* Hero Gradient */
+    .submission-hero {
+      background: linear-gradient(135deg, #0f172a 0%, #1e3a5f 50%, #0c4a6e 100%);
+      position: relative;
+      overflow: hidden;
+    }
+
+    .submission-hero::before {
+      content: '';
+      position: absolute;
+      top: 0;
+      left: 0;
+      right: 0;
+      bottom: 0;
+      background:
+        radial-gradient(ellipse at 20% 20%, rgba(14, 165, 233, 0.15) 0%, transparent 50%),
+        radial-gradient(ellipse at 80% 80%, rgba(139, 92, 246, 0.1) 0%, transparent 50%),
+        radial-gradient(ellipse at 50% 50%, rgba(6, 182, 212, 0.08) 0%, transparent 60%);
+      animation: heroGlow 8s ease-in-out infinite alternate;
+    }
+
+    @keyframes heroGlow {
+      0% { opacity: 0.8; }
+      100% { opacity: 1; }
+    }
+
+    .submission-hero::after {
+      content: '';
+      position: absolute;
+      top: 0;
+      left: 0;
+      right: 0;
+      bottom: 0;
+      background-image: url("data:image/svg+xml,%3Csvg width='60' height='60' viewBox='0 0 60 60' xmlns='http://www.w3.org/2000/svg'%3E%3Cg fill='none' fill-rule='evenodd'%3E%3Cg fill='%23ffffff' fill-opacity='0.03'%3E%3Cpath d='M36 34v-4h-2v4h-4v2h4v4h2v-4h4v-2h-4zm0-30V0h-2v4h-4v2h4v4h2V6h4V4h-4zM6 34v-4H4v4H0v2h4v4h2v-4h4v-2H6zM6 4V0H4v4H0v2h4v4h2V6h4V4H6z'/%3E%3C/g%3E%3C/g%3E%3C/svg%3E");
+    }
+
+    /* Section Card */
+    .section-card {
+      background: var(--glass-bg);
+      backdrop-filter: blur(16px);
+      -webkit-backdrop-filter: blur(16px);
+      border: 1px solid var(--glass-border);
+      border-radius: 1.5rem;
+      box-shadow: var(--shadow-glow);
+      transition: all 0.35s cubic-bezier(.4,0,.2,1);
+    }
+
+    .section-card:hover {
+      box-shadow: var(--card-hover-shadow);
+      border-color: rgba(14, 165, 233, 0.25);
+    }
+
+    /* Section Icon */
+    .section-icon {
+      width: 56px;
+      height: 56px;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      border-radius: 1rem;
+      background: linear-gradient(135deg, rgba(14, 165, 233, 0.15), rgba(139, 92, 246, 0.12));
+      color: var(--accent-blue);
+      flex-shrink: 0;
+    }
+
+    /* Form Styles */
+    .form-input {
+      width: 100%;
+      padding: 0.875rem 1rem;
+      background: var(--input-bg);
+      border: 1.5px solid var(--glass-border);
+      border-radius: 0.75rem;
+      color: var(--text-primary);
+      font-family: inherit;
+      font-size: 0.95rem;
+      transition: all 0.25s ease;
+    }
+
+    .form-input:focus {
+      outline: none;
+      border-color: var(--accent-blue);
+      box-shadow: 0 0 0 3px rgba(14, 165, 233, 0.15);
+    }
+
+    .form-input::placeholder {
+      color: var(--text-muted);
+    }
+
+    .form-label {
+      display: block;
+      margin-bottom: 0.5rem;
+      font-weight: 600;
+      font-size: 0.9rem;
+      color: var(--text-primary);
+    }
+
+    .form-label .required {
+      color: #ef4444;
+      margin-left: 0.25rem;
+    }
+
+    .form-label .optional {
+      color: var(--text-muted);
+      font-weight: 400;
+      font-size: 0.8rem;
+      margin-left: 0.5rem;
+    }
+
+    .form-group {
+      margin-bottom: 1.25rem;
+    }
+
+    .form-hint {
+      margin-top: 0.375rem;
+      font-size: 0.8rem;
+      color: var(--text-muted);
+    }
+
+    /* Checkbox */
+    .checkbox-wrapper {
+      display: flex;
+      align-items: flex-start;
+      gap: 0.75rem;
+      padding: 1rem;
+      background: rgba(14, 165, 233, 0.05);
+      border: 1px solid rgba(14, 165, 233, 0.15);
+      border-radius: 0.75rem;
+      cursor: pointer;
+      transition: all 0.25s ease;
+    }
+
+    .checkbox-wrapper:hover {
+      background: rgba(14, 165, 233, 0.08);
+      border-color: rgba(14, 165, 233, 0.25);
+    }
+
+    .checkbox-wrapper input[type="checkbox"] {
+      width: 20px;
+      height: 20px;
+      accent-color: var(--accent-blue);
+      cursor: pointer;
+      flex-shrink: 0;
+      margin-top: 2px;
+    }
+
+    .checkbox-label {
+      font-size: 0.9rem;
+      color: var(--text-secondary);
+      line-height: 1.5;
+    }
+
+    /* Submit Button */
+    .submit-btn {
+      display: inline-flex;
+      align-items: center;
+      justify-content: center;
+      gap: 0.75rem;
+      width: 100%;
+      padding: 1rem 2rem;
+      background: linear-gradient(135deg, var(--gradient-start), var(--gradient-end));
+      color: #fff;
+      font-weight: 700;
+      font-size: 1rem;
+      border: none;
+      border-radius: 0.875rem;
+      cursor: pointer;
+      transition: all 0.3s cubic-bezier(.4,0,.2,1);
+      box-shadow: 0 4px 14px rgba(14, 165, 233, 0.3);
+    }
+
+    .submit-btn:hover:not(:disabled) {
+      transform: translateY(-2px);
+      box-shadow: 0 6px 20px rgba(14, 165, 233, 0.4);
+    }
+
+    .submit-btn:disabled {
+      opacity: 0.7;
+      cursor: not-allowed;
+    }
+
+    /* Checklist Item */
+    .checklist-item {
+      display: flex;
+      align-items: flex-start;
+      gap: 0.75rem;
+      padding: 0.875rem 1rem;
+      background: rgba(16, 185, 129, 0.05);
+      border: 1px solid rgba(16, 185, 129, 0.15);
+      border-radius: 0.75rem;
+      margin-bottom: 0.75rem;
+      transition: all 0.25s ease;
+    }
+
+    .checklist-item:hover {
+      background: rgba(16, 185, 129, 0.08);
+      border-color: rgba(16, 185, 129, 0.25);
+    }
+
+    .check-icon {
+      width: 24px;
+      height: 24px;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      border-radius: 50%;
+      background: rgba(16, 185, 129, 0.15);
+      color: #10b981;
+      flex-shrink: 0;
+    }
+
+    /* Next Steps Card */
+    .next-step-card {
+      display: flex;
+      align-items: flex-start;
+      gap: 1rem;
+      padding: 1rem;
+      background: var(--section-alt-bg);
+      border-radius: 0.875rem;
+      transition: all 0.25s ease;
+    }
+
+    .next-step-card:hover {
+      background: rgba(14, 165, 233, 0.06);
+    }
+
+    .step-number {
+      width: 32px;
+      height: 32px;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      border-radius: 0.5rem;
+      background: linear-gradient(135deg, var(--gradient-start), var(--gradient-end));
+      color: white;
+      font-weight: 700;
+      font-size: 0.85rem;
+      flex-shrink: 0;
+    }
+
+    /* Reward Card */
+    .reward-card {
+      display: flex;
+      align-items: center;
+      gap: 1rem;
+      padding: 1.25rem;
+      background: linear-gradient(135deg, rgba(16, 185, 129, 0.08), rgba(14, 165, 233, 0.05));
+      border: 1px solid rgba(16, 185, 129, 0.2);
+      border-radius: 1rem;
+      transition: all 0.25s ease;
+    }
+
+    .reward-card:hover {
+      transform: translateY(-2px);
+      box-shadow: 0 8px 24px rgba(16, 185, 129, 0.12);
+    }
+
+    /* Fade Animation */
+    .fade-in {
+      opacity: 0;
+      transform: translateY(20px);
+      transition: opacity 0.6s ease, transform 0.6s ease;
+    }
+
+    .fade-in.visible {
+      opacity: 1;
+      transform: translateY(0);
+    }
+
+    /* Success Message */
+    .success-message {
+      display: none;
+      padding: 1.5rem;
+      background: linear-gradient(135deg, rgba(16, 185, 129, 0.1), rgba(14, 165, 233, 0.05));
+      border: 1px solid rgba(16, 185, 129, 0.3);
+      border-radius: 1rem;
+      text-align: center;
+    }
+
+    .success-message.show {
+      display: block;
+      animation: fadeIn 0.5s ease;
+    }
+
+    @keyframes fadeIn {
+      from { opacity: 0; transform: scale(0.95); }
+      to { opacity: 1; transform: scale(1); }
+    }
+
+    /* Error Message */
+    .error-message {
+      display: none;
+      padding: 1rem;
+      background: rgba(239, 68, 68, 0.1);
+      border: 1px solid rgba(239, 68, 68, 0.3);
+      border-radius: 0.75rem;
+      color: #ef4444;
+      text-align: center;
+      margin-bottom: 1rem;
+    }
+
+    .error-message.show {
+      display: block;
+    }
+
+    /* Illustration Container */
+    .illustration-container {
+      max-width: 280px;
+      margin: 0 auto 2rem;
+    }
+
+    @media (max-width: 640px) {
+      .illustration-container {
+        max-width: 200px;
+      }
+    }
+
+    /* Section Spacing */
+    .section {
+      padding: 4rem 1rem;
+    }
+
+    @media (max-width: 640px) {
+      .section {
+        padding: 3rem 1rem;
+      }
+    }
+
+    /* Loading Overlay */
+    .loading-overlay {
+      display: none;
+      position: fixed;
+      top: 0;
+      left: 0;
+      right: 0;
+      bottom: 0;
+      background: rgba(15, 23, 42, 0.85);
+      backdrop-filter: blur(8px);
+      z-index: 9999;
+      justify-content: center;
+      align-items: center;
+      flex-direction: column;
+    }
+
+    .loading-overlay.show {
+      display: flex;
+    }
+
+    .loading-spinner {
+      width: 60px;
+      height: 60px;
+      border: 4px solid rgba(14, 165, 233, 0.2);
+      border-top-color: #0EA5E9;
+      border-radius: 50%;
+      animation: spin 1s linear infinite;
+    }
+
+    @keyframes spin {
+      to { transform: rotate(360deg); }
+    }
+
+    .loading-text {
+      margin-top: 1.5rem;
+      color: white;
+      font-weight: 600;
+      font-size: 1.1rem;
+    }
+
+    .loading-progress {
+      width: 200px;
+      height: 6px;
+      background: rgba(255, 255, 255, 0.2);
+      border-radius: 3px;
+      margin-top: 1rem;
+      overflow: hidden;
+    }
+
+    .loading-progress-bar {
+      height: 100%;
+      background: linear-gradient(90deg, #0EA5E9, #8B5CF6);
+      border-radius: 3px;
+      width: 0%;
+      animation: progressAnim 2s ease-in-out infinite;
+    }
+
+    @keyframes progressAnim {
+      0% { width: 0%; margin-left: 0%; }
+      50% { width: 60%; margin-left: 20%; }
+      100% { width: 0%; margin-left: 100%; }
+    }
+  </style>
+</head>
+<body>
+  <!-- Loading Overlay -->
+  <div id="loadingOverlay" class="loading-overlay">
+    <div class="loading-spinner"></div>
+    <p class="loading-text" id="loadingText">Verifying Internship ID...</p>
+    <div class="loading-progress">
+      <div class="loading-progress-bar"></div>
+    </div>
+  </div>
+
+  <!-- ==================== HERO SECTION ==================== -->
+  <section class="submission-hero py-16 sm:py-24 px-4">
+    <div class="relative z-10 max-w-4xl mx-auto text-center">
+      <!-- Badge -->
+      <div class="inline-flex items-center gap-2 px-4 py-2 rounded-full mb-6 fade-in" style="background: linear-gradient(135deg, rgba(14, 165, 233, 0.2), rgba(139, 92, 246, 0.2)); border: 1px solid rgba(14, 165, 233, 0.3);">
+        <svg class="w-4 h-4 text-cyan-400" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+          <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 12l2 2 4-4m6 2a9 9 0 11-18 0 9 9 0 0118 0z"/>
+        </svg>
+        <span class="text-sm font-semibold text-cyan-300">Data Analysis Internship</span>
+      </div>
+
+      <!-- Title -->
+      <h1 class="text-3xl sm:text-4xl md:text-5xl font-bold text-white mb-4 fade-in">
+        Project Submission Portal
+      </h1>
+
+      <!-- Subtitle -->
+      <p class="text-lg sm:text-xl text-white/80 max-w-2xl mx-auto fade-in">
+        Submit your completed internship projects for verification and certification.
+      </p>
+
+      <!-- Illustration -->
+      <div class="illustration-container mt-8 fade-in">
+        <svg viewBox="0 0 500 400" fill="none" xmlns="http://www.w3.org/2000/svg" class="w-full h-auto">
+          <!-- Background Circle -->
+          <circle cx="250" cy="200" r="150" fill="url(#grad1)" opacity="0.1"/>
+          <!-- Document/Form -->
+          <rect x="160" y="80" width="180" height="220" rx="12" fill="white" stroke="#0EA5E9" stroke-width="2"/>
+          <rect x="180" y="110" width="100" height="8" rx="4" fill="#E2E8F0"/>
+          <rect x="180" y="130" width="140" height="8" rx="4" fill="#E2E8F0"/>
+          <rect x="180" y="160" width="140" height="30" rx="6" fill="#F1F5F9" stroke="#CBD5E1" stroke-width="1"/>
+          <rect x="180" y="200" width="140" height="30" rx="6" fill="#F1F5F9" stroke="#CBD5E1" stroke-width="1"/>
+          <rect x="180" y="240" width="140" height="30" rx="6" fill="#F1F5F9" stroke="#CBD5E1" stroke-width="1"/>
+          <!-- Checkmark Circle -->
+          <circle cx="320" cy="100" r="28" fill="url(#grad2)"/>
+          <path d="M308 100L316 108L332 92" stroke="white" stroke-width="3" stroke-linecap="round" stroke-linejoin="round"/>
+          <!-- Paper Plane -->
+          <g transform="translate(80, 180) rotate(-15)">
+            <path d="M0 30L60 15L50 40L30 35L0 30Z" fill="#8B5CF6"/>
+            <path d="M60 15L50 40L70 50L60 15Z" fill="#6366F1"/>
+            <path d="M0 30L30 35L25 45L0 30Z" fill="#A78BFA"/>
+          </g>
+          <!-- Floating Elements -->
+          <circle cx="380" cy="150" r="8" fill="#06B6D4" opacity="0.6"/>
+          <circle cx="120" cy="120" r="6" fill="#8B5CF6" opacity="0.6"/>
+          <circle cx="400" cy="250" r="10" fill="#0EA5E9" opacity="0.4"/>
+          <rect x="100" y="280" width="16" height="16" rx="3" fill="#06B6D4" opacity="0.5" transform="rotate(15 108 288)"/>
+          <!-- GitHub Icon -->
+          <circle cx="380" cy="220" r="22" fill="#1F2937"/>
+          <path d="M380 205C372.268 205 366 211.268 366 219C366 225.078 369.943 230.212 375.418 232.078C376.068 232.188 376.3 231.8 376.3 231.462V229.03C372.638 229.805 371.888 227.238 371.888 227.238C371.288 225.638 370.438 225.238 370.438 225.238C369.238 224.438 370.538 224.45 370.538 224.45C371.888 224.55 372.588 225.838 372.588 225.838C373.788 227.888 375.688 227.238 376.35 226.95C376.475 226.088 376.825 225.488 377.2 225.15C374.3 224.8 371.238 223.688 371.238 218.475C371.238 216.95 371.75 215.688 372.6 214.688C372.463 214.35 372.013 212.9 372.75 210.975C372.75 210.975 373.888 210.612 376.3 212.425C377.4 212.125 378.55 211.975 379.7 211.975C380.85 211.975 382 212.125 383.1 212.425C385.438 210.612 386.65 210.975 386.65 210.975C387.388 212.9 386.938 214.35 386.8 214.688C387.65 215.688 388.163 216.95 388.163 218.475C388.163 223.7 385.088 224.8 382.175 225.125C382.65 225.538 383.075 226.35 383.075 227.588V231.462C383.075 231.8 383.3 232.2 383.975 232.078C389.438 230.2 393.375 225.075 393.375 219C393.375 211.268 387.108 205 380 205Z" fill="white"/>
+          <!-- LinkedIn Icon -->
+          <circle cx="120" cy="220" r="22" fill="#0A66C2"/>
+          <path d="M112 228V215H116V228H112ZM114 213C112.9 213 112 212.1 112 211C112 209.9 112.9 209 114 209C115.1 209 116 209.9 116 211C116 212.1 115.1 213 114 213ZM128 228H124V221.5C124 220.1 123.4 219 122 219C120.9 219 120 219.8 120 221V228H116V215H120V216.5C120.6 215.6 121.8 215 123.2 215C126 215 128 217 128 220.5V228Z" fill="white"/>
+          <!-- Gradients -->
+          <defs>
+            <linearGradient id="grad1" x1="100" y1="50" x2="400" y2="350">
+              <stop offset="0%" stop-color="#0EA5E9"/>
+              <stop offset="100%" stop-color="#8B5CF6"/>
+            </linearGradient>
+            <linearGradient id="grad2" x1="292" y1="72" x2="348" y2="128">
+              <stop offset="0%" stop-color="#10B981"/>
+              <stop offset="100%" stop-color="#06B6D4"/>
+            </linearGradient>
+          </defs>
+        </svg>
+      </div>
+    </div>
+  </section>
+
+  <!-- ==================== INSTRUCTIONS SECTION ==================== -->
+  <section class="section" style="background: var(--bg-primary);">
+    <div class="max-w-4xl mx-auto">
+      <div class="section-card p-6 sm:p-8 fade-in">
+        <div class="flex items-start gap-4 mb-6">
+          <div class="section-icon">
+            <svg class="w-7 h-7 text-cyan-500" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+              <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 5H7a2 2 0 00-2 2v12a2 2 0 002 2h10a2 2 0 002-2V7a2 2 0 00-2-2h-2M9 5a2 2 0 002 2h2a2 2 0 002-2M9 5a2 2 0 012-2h2a2 2 0 012 2m-6 9l2 2 4-4"/>
+            </svg>
+          </div>
+          <div>
+            <h2 class="text-xl sm:text-2xl font-bold mb-1" style="color: var(--text-primary)">Before You Submit</h2>
+            <p class="text-sm text-cyan-500 font-medium">Please ensure the following requirements are met</p>
+          </div>
+        </div>
+
+        <div class="space-y-3">
+          <div class="checklist-item">
+            <div class="check-icon">
+              <svg class="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M5 13l4 4L19 7"/>
+              </svg>
+            </div>
+            <span style="color: var(--text-primary)">You have completed <strong>Task 1 and Task 2</strong> (Task 3 is optional)</span>
+          </div>
+
+          <div class="checklist-item">
+            <div class="check-icon">
+              <svg class="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M5 13l4 4L19 7"/>
+              </svg>
+            </div>
+            <span style="color: var(--text-primary)">Your project code is uploaded to <strong>GitHub</strong></span>
+          </div>
+
+          <div class="checklist-item">
+            <div class="check-icon">
+              <svg class="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M5 13l4 4L19 7"/>
+              </svg>
+            </div>
+            <span style="color: var(--text-primary)">Your <strong>LinkedIn post</strong> about the internship is published</span>
+          </div>
+
+          <div class="checklist-item">
+            <div class="check-icon">
+              <svg class="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M5 13l4 4L19 7"/>
+              </svg>
+            </div>
+            <span style="color: var(--text-primary)">Your GitHub repository is <strong>public</strong></span>
+          </div>
+        </div>
+
+        <div class="mt-6 p-4 rounded-xl" style="background: rgba(139, 92, 246, 0.08); border: 1px solid rgba(139, 92, 246, 0.2);">
+          <p class="text-sm text-center" style="color: var(--text-secondary)">
+            <svg class="w-4 h-4 inline mr-1 text-purple-500" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+              <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M13 16h-1v-4h-1m1-4h.01M21 12a9 9 0 11-18 0 9 9 0 0118 0z"/>
+            </svg>
+            All submissions will be <strong>manually reviewed</strong> by the VectorForgeML team.
+          </p>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- ==================== SUBMISSION FORM SECTION ==================== -->
+  <section class="section" style="background: var(--bg-primary);">
+    <div class="max-w-3xl mx-auto">
+      <div class="section-card p-6 sm:p-8 fade-in">
+        <div class="flex items-start gap-4 mb-8">
+          <div class="section-icon" style="background: linear-gradient(135deg, rgba(139, 92, 246, 0.15), rgba(14, 165, 233, 0.12));">
+            <svg class="w-7 h-7 text-purple-500" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+              <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 12h6m-6 4h6m2 5H7a2 2 0 01-2-2V5a2 2 0 012-2h5.586a1 1 0 01.707.293l5.414 5.414a1 1 0 01.293.707V19a2 2 0 01-2 2z"/>
+            </svg>
+          </div>
+          <div>
+            <h2 class="text-xl sm:text-2xl font-bold mb-1" style="color: var(--text-primary)">Submission Form</h2>
+            <p class="text-sm text-purple-500 font-medium">Fill in your details and project links</p>
+          </div>
+        </div>
+
+        <!-- Success Message -->
+        <div id="successMessage" class="success-message">
+          <svg class="w-16 h-16 mx-auto mb-4 text-emerald-500" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 12l2 2 4-4m6 2a9 9 0 11-18 0 9 9 0 0118 0z"/>
+          </svg>
+          <h3 class="text-xl font-bold mb-2" style="color: var(--text-primary)">Submission Successful!</h3>
+          <p style="color: var(--text-secondary)">Thank you for submitting your project. Our team will review it and get back to you soon.</p>
+        </div>
+
+        <!-- Error Message -->
+        <div id="errorMessage" class="error-message">
+          <svg class="w-5 h-5 inline mr-2" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M12 8v4m0 4h.01M21 12a9 9 0 11-18 0 9 9 0 0118 0z"/>
+          </svg>
+          <span id="errorText">Something went wrong. Please try again.</span>
+        </div>
+
+        <!-- Form -->
+        <form id="submissionForm">
+          <div class="grid grid-cols-1 sm:grid-cols-2 gap-4">
+            <!-- Full Name -->
+            <div class="form-group">
+              <label class="form-label">Full Name <span class="required">*</span></label>
+              <input type="text" name="name" class="form-input" placeholder="John Doe" required />
+            </div>
+
+            <!-- Email Address -->
+            <div class="form-group">
+              <label class="form-label">Email Address <span class="required">*</span></label>
+              <input type="email" name="email" class="form-input" placeholder="john@example.com" required />
+            </div>
+          </div>
+
+          <!-- Internship ID -->
+          <div class="form-group">
+            <label class="form-label">Internship ID <span class="required">*</span></label>
+            <input type="text" name="internship_id" class="form-input" placeholder="VFML/MAR26/DA001" required />
+            <p class="form-hint">Example: VFML/MAR26/DA001 (as received during registration)</p>
+          </div>
+
+          <!-- GitHub Profile -->
+          <div class="form-group">
+            <label class="form-label">
+              <svg class="w-4 h-4 inline mr-1" fill="currentColor" viewBox="0 0 24 24">
+                <path d="M12 0c-6.626 0-12 5.373-12 12 0 5.302 3.438 9.8 8.207 11.387.599.111.793-.261.793-.577v-2.234c-3.338.726-4.033-1.416-4.033-1.416-.546-1.387-1.333-1.756-1.333-1.756-1.089-.745.083-.729.083-.729 1.205.084 1.839 1.237 1.839 1.237 1.07 1.834 2.807 1.304 3.492.997.107-.775.418-1.305.762-1.604-2.665-.305-5.467-1.334-5.467-5.931 0-1.311.469-2.381 1.236-3.221-.124-.303-.535-1.524.117-3.176 0 0 1.008-.322 3.301 1.23.957-.266 1.983-.399 3.003-.404 1.02.005 2.047.138 3.006.404 2.291-1.552 3.297-1.23 3.297-1.23.653 1.653.242 2.874.118 3.176.77.84 1.235 1.911 1.235 3.221 0 4.609-2.807 5.624-5.479 5.921.43.372.823 1.102.823 2.222v3.293c0 .319.192.694.801.576 4.765-1.589 8.199-6.086 8.199-11.386 0-6.627-5.373-12-12-12z"/>
+              </svg>
+              GitHub Profile Link <span class="required">*</span>
+            </label>
+            <input type="url" name="github_profile" class="form-input" placeholder="https://github.com/yourusername" required />
+          </div>
+
+          <!-- Task 1 Repository -->
+          <div class="form-group">
+            <label class="form-label">Task 1 GitHub Repository <span class="required">*</span></label>
+            <input type="url" name="task1_link" class="form-input" placeholder="https://github.com/yourusername/task1-repo" required />
+          </div>
+
+          <!-- Task 2 Repository -->
+          <div class="form-group">
+            <label class="form-label">Task 2 GitHub Repository <span class="required">*</span></label>
+            <input type="url" name="task2_link" class="form-input" placeholder="https://github.com/yourusername/task2-repo" required />
+          </div>
+
+          <!-- Task 3 Repository -->
+          <div class="form-group">
+            <label class="form-label">Task 3 GitHub Repository <span class="optional">(Optional)</span></label>
+            <input type="url" name="task3_link" class="form-input" placeholder="https://github.com/yourusername/task3-repo" />
+          </div>
+
+          <!-- LinkedIn Post -->
+          <div class="form-group">
+            <label class="form-label">
+              <svg class="w-4 h-4 inline mr-1 text-sky-600" fill="currentColor" viewBox="0 0 24 24">
+                <path d="M20.447 20.452h-3.554v-5.569c0-1.328-.027-3.037-1.852-3.037-1.853 0-2.136 1.445-2.136 2.939v5.667H9.351V9h3.414v1.561h.046c.477-.9 1.637-1.85 3.37-1.85 3.601 0 4.267 2.37 4.267 5.455v6.286zM5.337 7.433a2.062 2.062 0 01-2.063-2.065 2.064 2.064 0 112.063 2.065zm1.782 13.019H3.555V9h3.564v11.452zM22.225 0H1.771C.792 0 0 .774 0 1.729v20.542C0 23.227.792 24 1.771 24h20.451C23.2 24 24 23.227 24 22.271V1.729C24 .774 23.2 0 22.222 0h.003z"/>
+              </svg>
+              LinkedIn Post Link <span class="required">*</span>
+            </label>
+            <input type="url" name="linkedin_post" class="form-input" placeholder="https://www.linkedin.com/posts/..." required />
+          </div>
+
+          <!-- Short Description -->
+          <div class="form-group">
+            <label class="form-label">Short Description <span class="optional">(Optional)</span></label>
+            <textarea name="description" class="form-input" rows="4" placeholder="Briefly describe what you learned or built during this internship..."></textarea>
+          </div>
+
+          <!-- Confirmation Checkbox -->
+          <div class="form-group">
+            <label class="checkbox-wrapper">
+              <input type="checkbox" name="confirmation" required />
+              <span class="checkbox-label">I confirm that the submitted work is my own and completed during the VectorForgeML internship.</span>
+            </label>
+          </div>
+
+          <!-- Submit Button -->
+          <button type="submit" class="submit-btn" id="submitBtn">
+            <svg class="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+              <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M12 19l9 2-9-18-9 18 9-2zm0 0v-8"/>
+            </svg>
+            <span id="btnText">Submit Internship Project</span>
+          </button>
+        </form>
+      </div>
+    </div>
+  </section>
+
+  <!-- ==================== WHAT HAPPENS NEXT SECTION ==================== -->
+  <section class="section" style="background: var(--bg-primary);">
+    <div class="max-w-4xl mx-auto">
+      <div class="section-card p-6 sm:p-8 fade-in">
+        <div class="flex items-start gap-4 mb-8">
+          <div class="section-icon" style="background: linear-gradient(135deg, rgba(16, 185, 129, 0.15), rgba(14, 165, 233, 0.12));">
+            <svg class="w-7 h-7 text-emerald-500" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+              <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M13 7h8m0 0v8m0-8l-8 8-4-4-6 6"/>
+            </svg>
+          </div>
+          <div>
+            <h2 class="text-xl sm:text-2xl font-bold mb-1" style="color: var(--text-primary)">What Happens Next?</h2>
+            <p class="text-sm text-emerald-500 font-medium">Our review process after your submission</p>
+          </div>
+        </div>
+
+        <!-- Steps -->
+        <div class="grid grid-cols-1 sm:grid-cols-3 gap-4 mb-8">
+          <div class="next-step-card">
+            <div class="step-number">1</div>
+            <div>
+              <h4 class="font-semibold mb-1" style="color: var(--text-primary)">Review GitHub</h4>
+              <p class="text-sm" style="color: var(--text-secondary)">Our team will review your GitHub project</p>
+            </div>
+          </div>
+
+          <div class="next-step-card">
+            <div class="step-number">2</div>
+            <div>
+              <h4 class="font-semibold mb-1" style="color: var(--text-primary)">Verify LinkedIn</h4>
+              <p class="text-sm" style="color: var(--text-secondary)">We'll verify your LinkedIn post</p>
+            </div>
+          </div>
+
+          <div class="next-step-card">
+            <div class="step-number">3</div>
+            <div>
+              <h4 class="font-semibold mb-1" style="color: var(--text-primary)">Validate Completion</h4>
+              <p class="text-sm" style="color: var(--text-secondary)">We'll validate your project completion</p>
+            </div>
+          </div>
+        </div>
+
+        <!-- Rewards -->
+        <h3 class="font-bold mb-4" style="color: var(--text-primary)">If everything is correct, you will receive:</h3>
+
+        <div class="grid grid-cols-1 sm:grid-cols-2 gap-4">
+          <div class="reward-card">
+            <div class="w-12 h-12 rounded-xl flex items-center justify-center" style="background: linear-gradient(135deg, rgba(16, 185, 129, 0.2), rgba(6, 182, 212, 0.15));">
+              <svg class="w-6 h-6 text-emerald-500" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 12l2 2 4-4M7.835 4.697a3.42 3.42 0 001.946-.806 3.42 3.42 0 014.438 0 3.42 3.42 0 001.946.806 3.42 3.42 0 013.138 3.138 3.42 3.42 0 00.806 1.946 3.42 3.42 0 010 4.438 3.42 3.42 0 00-.806 1.946 3.42 3.42 0 01-3.138 3.138 3.42 3.42 0 00-1.946.806 3.42 3.42 0 01-4.438 0 3.42 3.42 0 00-1.946-.806 3.42 3.42 0 01-3.138-3.138 3.42 3.42 0 00-.806-1.946 3.42 3.42 0 010-4.438 3.42 3.42 0 00.806-1.946 3.42 3.42 0 013.138-3.138z"/>
+              </svg>
+            </div>
+            <div>
+              <h4 class="font-bold" style="color: var(--text-primary)">Internship Completion Certificate</h4>
+              <p class="text-sm" style="color: var(--text-secondary)">Official certificate from VectorForgeML</p>
+            </div>
+          </div>
+
+          <div class="reward-card">
+            <div class="w-12 h-12 rounded-xl flex items-center justify-center" style="background: linear-gradient(135deg, rgba(139, 92, 246, 0.2), rgba(14, 165, 233, 0.15));">
+              <svg class="w-6 h-6 text-purple-500" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M11.049 2.927c.3-.921 1.603-.921 1.902 0l1.519 4.674a1 1 0 00.95.69h4.915c.969 0 1.371 1.24.588 1.81l-3.976 2.888a1 1 0 00-.363 1.118l1.518 4.674c.3.922-.755 1.688-1.538 1.118l-3.976-2.888a1 1 0 00-1.176 0l-3.976 2.888c-.783.57-1.838-.197-1.538-1.118l1.518-4.674a1 1 0 00-.363-1.118l-3.976-2.888c-.784-.57-.38-1.81.588-1.81h4.914a1 1 0 00.951-.69l1.519-4.674z"/>
+              </svg>
+            </div>
+            <div>
+              <h4 class="font-bold" style="color: var(--text-primary)">Letter of Recommendation</h4>
+              <p class="text-sm" style="color: var(--text-secondary)">For selected outstanding interns</p>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- ==================== FOOTER ==================== -->
+  <footer class="py-10 px-4" style="background: var(--bg-secondary); border-top: 1px solid var(--glass-border);">
+    <div class="max-w-4xl mx-auto text-center">
+      <div class="flex items-center justify-center gap-3 mb-4">
+        <img src="../assets/images/VectorForgeML_Logo.png" alt="VectorForgeML Logo" class="w-10 h-10" />
+        <span class="text-xl font-bold" style="color: var(--text-primary)">VectorForgeML</span>
+      </div>
+
+      <p class="font-semibold mb-2" style="color: var(--text-primary)">Data Analysis Internship Program</p>
+
+      <div class="flex items-center justify-center gap-2 mb-6">
+        <svg class="w-4 h-4 text-emerald-500" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+          <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 12l2 2 4-4m5.618-4.016A11.955 11.955 0 0112 2.944a11.955 11.955 0 01-8.618 3.04A12.02 12.02 0 003 9c0 5.591 3.824 10.29 9 11.622 5.176-1.332 9-6.03 9-11.622 0-1.042-.133-2.052-.382-3.016z"/>
+        </svg>
+        <span class="text-sm" style="color: var(--text-muted)">Udyam Registered MSME: UDYAM-MH-03-0134007</span>
+      </div>
+
+      <div class="flex items-center justify-center gap-4">
+        <a href="https://www.linkedin.com/company/vectorforgeml" target="_blank" rel="noopener noreferrer" class="text-gray-400 hover:text-sky-500 transition-colors">
+          <svg class="w-5 h-5" fill="currentColor" viewBox="0 0 24 24">
+            <path d="M20.447 20.452h-3.554v-5.569c0-1.328-.027-3.037-1.852-3.037-1.853 0-2.136 1.445-2.136 2.939v5.667H9.351V9h3.414v1.561h.046c.477-.9 1.637-1.85 3.37-1.85 3.601 0 4.267 2.37 4.267 5.455v6.286zM5.337 7.433a2.062 2.062 0 01-2.063-2.065 2.064 2.064 0 112.063 2.065zm1.782 13.019H3.555V9h3.564v11.452zM22.225 0H1.771C.792 0 0 .774 0 1.729v20.542C0 23.227.792 24 1.771 24h20.451C23.2 24 24 23.227 24 22.271V1.729C24 .774 23.2 0 22.222 0h.003z"/>
+          </svg>
+        </a>
+        <a href="https://github.com/VectorForgeML" target="_blank" rel="noopener noreferrer" class="text-gray-400 hover:text-white transition-colors">
+          <svg class="w-5 h-5" fill="currentColor" viewBox="0 0 24 24">
+            <path d="M12 0c-6.626 0-12 5.373-12 12 0 5.302 3.438 9.8 8.207 11.387.599.111.793-.261.793-.577v-2.234c-3.338.726-4.033-1.416-4.033-1.416-.546-1.387-1.333-1.756-1.333-1.756-1.089-.745.083-.729.083-.729 1.205.084 1.839 1.237 1.839 1.237 1.07 1.834 2.807 1.304 3.492.997.107-.775.418-1.305.762-1.604-2.665-.305-5.467-1.334-5.467-5.931 0-1.311.469-2.381 1.236-3.221-.124-.303-.535-1.524.117-3.176 0 0 1.008-.322 3.301 1.23.957-.266 1.983-.399 3.003-.404 1.02.005 2.047.138 3.006.404 2.291-1.552 3.297-1.23 3.297-1.23.653 1.653.242 2.874.118 3.176.77.84 1.235 1.911 1.235 3.221 0 4.609-2.807 5.624-5.479 5.921.43.372.823 1.102.823 2.222v3.293c0 .319.192.694.801.576 4.765-1.589 8.199-6.086 8.199-11.386 0-6.627-5.373-12-12-12z"/>
+          </svg>
+        </a>
+      </div>
+    </div>
+  </footer>
+
+  <!-- ==================== JAVASCRIPT ==================== -->
+  <script>
+    // Fade-in animation
+    const fadeElements = document.querySelectorAll('.fade-in');
+    const fadeObserver = new IntersectionObserver((entries) => {
+      entries.forEach(entry => {
+        if (entry.isIntersecting) entry.target.classList.add('visible');
+      });
+    }, { threshold: 0.1, rootMargin: '0px 0px -50px 0px' });
+    fadeElements.forEach(el => fadeObserver.observe(el));
+
+    // Theme detection
+    const root = document.documentElement;
+    const prefersDark = window.matchMedia('(prefers-color-scheme: dark)');
+    function updateTheme() {
+      const savedTheme = localStorage.getItem('theme');
+      if (savedTheme === 'dark' || (!savedTheme && prefersDark.matches)) {
+        root.classList.remove('light');
+        root.classList.add('dark');
+      } else {
+        root.classList.remove('dark');
+        root.classList.add('light');
+      }
+    }
+    updateTheme();
+    prefersDark.addEventListener('change', updateTheme);
+    window.addEventListener('storage', updateTheme);
+
+    // Form submission
+    const form = document.getElementById('submissionForm');
+    const submitBtn = document.getElementById('submitBtn');
+    const btnText = document.getElementById('btnText');
+    const successMsg = document.getElementById('successMessage');
+    const errorMsg = document.getElementById('errorMessage');
+    const errorText = document.getElementById('errorText');
+    const loadingOverlay = document.getElementById('loadingOverlay');
+    const loadingText = document.getElementById('loadingText');
+
+    // Replace with your Google Apps Script URL
+    const SCRIPT_URL = 'https://script.google.com/macros/s/AKfycbwZQlHmKgHbXYhgOm4z4L9daAKD2_tsEWmNCkzu1cjTMI_2h0hcZJcLR97MvP9NVby4gQ/exec';
+
+    // Show/hide loading overlay
+    function showLoading(text) {
+      loadingText.textContent = text;
+      loadingOverlay.classList.add('show');
+    }
+
+    function hideLoading() {
+      loadingOverlay.classList.remove('show');
+    }
+
+    form.addEventListener('submit', async (e) => {
+      e.preventDefault();
+
+      // Show loading overlay
+      showLoading('Verifying Internship ID...');
+      submitBtn.disabled = true;
+      errorMsg.classList.remove('show');
+
+      // Collect form data
+      const formData = new FormData(form);
+      const data = {
+        action: 'submission',
+        name: formData.get('name'),
+        email: formData.get('email'),
+        internship_id: formData.get('internship_id'),
+        github_profile: formData.get('github_profile'),
+        task1_link: formData.get('task1_link'),
+        task2_link: formData.get('task2_link'),
+        task3_link: formData.get('task3_link') || '',
+        linkedin_post: formData.get('linkedin_post'),
+        description: formData.get('description') || '',
+        timestamp: new Date().toISOString()
+      };
+
+      try {
+        // First verify intern exists
+        const verifyUrl = `${SCRIPT_URL}?action=verify&email=${encodeURIComponent(data.email)}&internship_id=${encodeURIComponent(data.internship_id)}`;
+
+        const verifyResponse = await fetch(verifyUrl);
+        const verifyResult = await verifyResponse.json();
+
+        if (!verifyResult.valid) {
+          hideLoading();
+          errorText.textContent = verifyResult.message || 'Internship ID and Email do not match our records. Please check and try again.';
+          errorMsg.classList.add('show');
+          submitBtn.disabled = false;
+          // Scroll to error message
+          errorMsg.scrollIntoView({ behavior: 'smooth', block: 'center' });
+          return;
+        }
+
+        // Submit the form
+        showLoading('Submitting your project...');
+        const submitResponse = await fetch(SCRIPT_URL, {
+          method: 'POST',
+          headers: { 'Content-Type': 'text/plain' },
+          body: JSON.stringify(data)
+        });
+
+        const result = await submitResponse.json();
+        hideLoading();
+
+        if (result.status === 'success') {
+          form.style.display = 'none';
+          successMsg.classList.add('show');
+          // Scroll to success message
+          successMsg.scrollIntoView({ behavior: 'smooth', block: 'center' });
+        } else if (result.status === 'duplicate') {
+          errorText.textContent = result.message || 'You have already submitted for this internship.';
+          errorMsg.classList.add('show');
+          submitBtn.disabled = false;
+          errorMsg.scrollIntoView({ behavior: 'smooth', block: 'center' });
+        } else {
+          throw new Error(result.message || 'Submission failed');
+        }
+
+      } catch (error) {
+        hideLoading();
+        errorText.textContent = error.message || 'Failed to submit. Please try again.';
+        errorMsg.classList.add('show');
+        submitBtn.disabled = false;
+        errorMsg.scrollIntoView({ behavior: 'smooth', block: 'center' });
+      }
+    });
+  </script>
+</body>
+</html>
