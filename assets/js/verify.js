@@ -1,7 +1,7 @@
 (function () {
   'use strict';
 
-  const API_BASE_URL = 'https://script.google.com/macros/s/AKfycbx5MbCqzeYYmWxJtt7W2-vSynt_6GFHsTkqb86m3U5WRmh265H59HQu0viraMIwoMeaag/exec';
+  const API_BASE_URL = 'https://script.google.com/macros/s/AKfycbz8nOmt4y6d50CAo2g6K-FDc_zdeM0oMgA_OIsQxjbcq0i1frBvNDb-mriV82s2fPh64A/exec';
   const RESULT_CONTAINER_ID = 'verify-result';
 
   function getCertificateIdFromURL() {
