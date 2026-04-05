@@ -286,11 +286,17 @@
      Works from root-level and subdirectory pages
   ---------------------------------------- */
   function getBasePath() {
-    const path = window.location.pathname;
-    if (path.includes('/tracks/')) {
-      return '../';
-    }
-    return './';
+    const path = window.location.pathname || '/';
+    const segments = path.split('/').filter(Boolean);
+    if (!segments.length) return './';
+
+    const endsWithSlash = path.endsWith('/');
+    const lastSegment = segments[segments.length - 1] || '';
+    const isFilePath = !endsWithSlash && lastSegment.includes('.');
+    const depth = isFilePath ? segments.length - 1 : segments.length;
+
+    if (depth <= 0) return './';
+    return '../'.repeat(depth);
   }
 
   /* ----------------------------------------
